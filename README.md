@@ -1,4 +1,4 @@
-# OPAQS - Beta Version
+# OPAQS - Development (Unstable version)
 
 The Opportunistic Aquatic Surface Vehicles Simulator, is a set of
 simulation models in OMNeT++ to simulate opportunistic networks. It has a
