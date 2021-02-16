@@ -1,27 +1,27 @@
 version 2
-run A-0-20210215-23:22:58-9744
+run A-0-20210216-22:43:15-3872
 attr configname A
-attr datetime 20210215-23:22:58
+attr datetime 20210216-22:43:15
 attr experiment A
-attr inifile GwSimV2.ini
+attr inifile GwSimV3_2021.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network NetworkTormV2
-attr processid 9744
+attr processid 3872
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
 param **.mobility.traceFile "\"AllPaths/mobPaths/A.movements\""
-param **.numNodes 11
+param **.numNodes 2
 param **.application.dataGenerationInterval 1s
 param **.application.dataSizeInBytes 10
 param **.application.ttl 999999s
 param **application.nodesThatGen false
 param **application.nodesGenMsg "\"\""
-param **application.startMultipleMsg false
+param **application.startMultipleMsg true
 param **application.numMultipleMsg 100
 param **application.hopsListSize 50
 param **.application.endGeneratingMsg 149s
@@ -84,37 +84,19 @@ param **.mobility.traceFile "\"paths/Moves2.movements\""
 param **.mobility.is3D false
 param **.mobility.nodeId -1
 
-scalar NetworkTormV2.node[0].routing numEventsHandled 1136
-scalar NetworkTormV2.node[0].neighboring numEventsHandled 2020
-scalar NetworkTormV2.node[1].routing numEventsHandled 1268
-scalar NetworkTormV2.node[1].neighboring numEventsHandled 2271
-scalar NetworkTormV2.node[2].routing numEventsHandled 1096
-scalar NetworkTormV2.node[2].neighboring numEventsHandled 1950
-scalar NetworkTormV2.node[3].routing numEventsHandled 1254
-scalar NetworkTormV2.node[3].neighboring numEventsHandled 2249
-scalar NetworkTormV2.node[4].routing numEventsHandled 1661
-scalar NetworkTormV2.node[4].neighboring numEventsHandled 3267
-scalar NetworkTormV2.node[5].routing numEventsHandled 1236
-scalar NetworkTormV2.node[5].neighboring numEventsHandled 2216
-scalar NetworkTormV2.node[6].routing numEventsHandled 1151
-scalar NetworkTormV2.node[6].neighboring numEventsHandled 2048
-scalar NetworkTormV2.node[7].routing numEventsHandled 1266
-scalar NetworkTormV2.node[7].neighboring numEventsHandled 2272
-scalar NetworkTormV2.node[8].routing numEventsHandled 1135
-scalar NetworkTormV2.node[8].neighboring numEventsHandled 2014
-scalar NetworkTormV2.node[9].routing numEventsHandled 1008
-scalar NetworkTormV2.node[9].neighboring numEventsHandled 1768
-scalar NetworkTormV2.node[10].routing numEventsHandled 1008
-scalar NetworkTormV2.node[10].neighboring numEventsHandled 1737
+scalar NetworkTormV2.node[0].routing numEventsHandled 4716
+scalar NetworkTormV2.node[0].neighboring numEventsHandled 8325
+scalar NetworkTormV2.node[1].routing numEventsHandled 4715
+scalar NetworkTormV2.node[1].neighboring numEventsHandled 8147
 scalar NetworkTormV2 neighbourhoodSize:min 1
 attr source neighbourhoodSize
-scalar NetworkTormV2 neighbourhoodSize:max 8
+scalar NetworkTormV2 neighbourhoodSize:max 1
 attr source neighbourhoodSize
-scalar NetworkTormV2 neighbourhoodSize:mean 3.8181818181818
+scalar NetworkTormV2 neighbourhoodSize:mean 1
 attr source neighbourhoodSize
-scalar NetworkTormV2 totalBytesReceivedSum:max 29892
+scalar NetworkTormV2 totalBytesReceivedSum:max 14805
 attr source sum(totalBytesReceived)
-scalar NetworkTormV2 totalBytesReceivedSum:last 29892
+scalar NetworkTormV2 totalBytesReceivedSum:last 14805
 attr source sum(totalBytesReceived)
 scalar NetworkTormV2 dataReqBytesReceivedSum:max nan
 attr source sum(dataReqBytesReceived)
@@ -124,9 +106,9 @@ scalar NetworkTormV2 sumVecBytesReceivedSum:max nan
 attr source sum(sumVecBytesReceived)
 scalar NetworkTormV2 sumVecBytesReceivedSum:last nan
 attr source sum(sumVecBytesReceived)
-scalar NetworkTormV2 dataBytesReceivedSum:max 29892
+scalar NetworkTormV2 dataBytesReceivedSum:max 14805
 attr source sum(dataBytesReceived)
-scalar NetworkTormV2 dataBytesReceivedSum:last 29892
+scalar NetworkTormV2 dataBytesReceivedSum:last 14805
 attr source sum(dataBytesReceived)
 scalar NetworkTormV2 deliveryRatio:max nan
 attr source sum(totalDataBytesReceived)/sum(totalDataBytesReceivableByAllNodes)

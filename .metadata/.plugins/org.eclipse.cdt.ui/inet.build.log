@@ -1,4 +1,4 @@
-23:30:31 **** Incremental Build of configuration debug for project inet ****
+22:51:32 **** Incremental Build of configuration debug for project inet ****
 make MODE=debug -j8 all 
 cd src && /usr/bin/make
 make[1]: Entering directory '/c/Users/casta/Documents/Omnet/MySim/inet/src'
@@ -10,5 +10,5 @@ Building...
 make[1]: Nothing to be done for 'all-pch'.
 make[1]: Leaving directory '/c/Users/casta/Documents/Omnet/MySim/inet/src'
 
-23:30:34 Build Finished (took 2s.886ms)
+22:51:34 Build Finished (took 2s.764ms)
 

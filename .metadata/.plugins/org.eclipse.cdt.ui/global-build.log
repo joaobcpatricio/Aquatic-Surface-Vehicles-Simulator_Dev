@@ -70,3 +70,75 @@ rm -f simulations/DanT/DataResults/*
 find simulations/DanT/Logs/ -name "*.txt" -type f -delete
 #rm -r simulations/ElectGW/DataResults/*	
 #find simulations/ElectGW/Logs/ -name "*.txt" -type f -delete
+22:41:35 **** Incremental Build of configuration debug for project inet ****
+make MODE=debug -j8 all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/c/Users/casta/Documents/Omnet/MySim/inet/src'
+*** COMPILING with:
+g++ -c -std=c++11 -g -Wall -MMD -MP -MF .d    -isystem /usr/include -isystem /mingw64/include -fno-stack-protector  -DXMLPARSER=libxml -DPREFER_QTENV -DWITH_QTENV -DWITH_PARSIM -DWITH_NETBUILDER -DWITH_OSG -DWITH_OSGEARTH -DINET_EXPORT -Wno-overloaded-virtual -include inet/common/precompiled_debug.h  -DINET_EXPORT -I. -IC:/Users/casta/Documents/Omnet/omnetpp-5.4.1/include
+*** LINKING with:
+g++ -shared  -o ../out/gcc-debug/src/libINET_dbg.dll -Wl,--no-as-needed -Wl,--whole-archive  -lws2_32 -Wl,--no-whole-archive -loppenvir_dbg -loppsim_dbg -lstdc++  -lOpenThreads -losg -losgText -losgDB -losgEarth -losgEarthUtil -Wl,-rpath,C:/Users/casta/Documents/Omnet/omnetpp-5.4.1/lib -Wl,-rpath,C:/Users/casta/Documents/Omnet/omnetpp-5.4.1/tools/win64/lib -Wl,-rpath,. -L/usr/bin -L/usr/lib -L/mingw64/lib -shared-libgcc -LC:/Users/casta/Documents/Omnet/omnetpp-5.4.1/lib
+Building...
+make[1]: Nothing to be done for 'all-pch'.
+make[1]: Leaving directory '/c/Users/casta/Documents/Omnet/MySim/inet/src'
+22:42:02 **** Incremental Build of configuration debug for project OPAQS ****
+make MODE=debug all 
+cd src && /usr/bin/make	
+make[1]: Entering directory '/c/Users/casta/Documents/Omnet/MySim/OPAQS/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/c/Users/casta/Documents/Omnet/MySim/OPAQS/src'
+#find simulations/DanT/Logs/ -name "*.txt" -type f -delete
+#rm -r simulations/DanT/DataResults/*
+rm -f simulations/DanT/DataResults/*
+#find simulations/DanT/Logs/ -name "*.txt" -type f -delete
+find simulations/DanT/Logs/ -name "*.txt" -type f -delete
+#rm -r simulations/ElectGW/DataResults/*	
+#find simulations/ElectGW/Logs/ -name "*.txt" -type f -delete
+22:42:56 **** Incremental Build of configuration debug for project inet ****
+make MODE=debug -j8 all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/c/Users/casta/Documents/Omnet/MySim/inet/src'
+*** COMPILING with:
+g++ -c -std=c++11 -g -Wall -MMD -MP -MF .d    -isystem /usr/include -isystem /mingw64/include -fno-stack-protector  -DXMLPARSER=libxml -DPREFER_QTENV -DWITH_QTENV -DWITH_PARSIM -DWITH_NETBUILDER -DWITH_OSG -DWITH_OSGEARTH -DINET_EXPORT -Wno-overloaded-virtual -include inet/common/precompiled_debug.h  -DINET_EXPORT -I. -IC:/Users/casta/Documents/Omnet/omnetpp-5.4.1/include
+*** LINKING with:
+g++ -shared  -o ../out/gcc-debug/src/libINET_dbg.dll -Wl,--no-as-needed -Wl,--whole-archive  -lws2_32 -Wl,--no-whole-archive -loppenvir_dbg -loppsim_dbg -lstdc++  -lOpenThreads -losg -losgText -losgDB -losgEarth -losgEarthUtil -Wl,-rpath,C:/Users/casta/Documents/Omnet/omnetpp-5.4.1/lib -Wl,-rpath,C:/Users/casta/Documents/Omnet/omnetpp-5.4.1/tools/win64/lib -Wl,-rpath,. -L/usr/bin -L/usr/lib -L/mingw64/lib -shared-libgcc -LC:/Users/casta/Documents/Omnet/omnetpp-5.4.1/lib
+Building...
+make[1]: Nothing to be done for 'all-pch'.
+make[1]: Leaving directory '/c/Users/casta/Documents/Omnet/MySim/inet/src'
+22:42:59 **** Incremental Build of configuration debug for project OPAQS ****
+make MODE=debug all 
+cd src && /usr/bin/make	
+make[1]: Entering directory '/c/Users/casta/Documents/Omnet/MySim/OPAQS/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/c/Users/casta/Documents/Omnet/MySim/OPAQS/src'
+#find simulations/DanT/Logs/ -name "*.txt" -type f -delete
+#rm -r simulations/DanT/DataResults/*
+rm -f simulations/DanT/DataResults/*
+#find simulations/DanT/Logs/ -name "*.txt" -type f -delete
+find simulations/DanT/Logs/ -name "*.txt" -type f -delete
+#rm -r simulations/ElectGW/DataResults/*	
+#find simulations/ElectGW/Logs/ -name "*.txt" -type f -delete
+22:51:32 **** Incremental Build of configuration debug for project inet ****
+make MODE=debug -j8 all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/c/Users/casta/Documents/Omnet/MySim/inet/src'
+*** COMPILING with:
+g++ -c -std=c++11 -g -Wall -MMD -MP -MF .d    -isystem /usr/include -isystem /mingw64/include -fno-stack-protector  -DXMLPARSER=libxml -DPREFER_QTENV -DWITH_QTENV -DWITH_PARSIM -DWITH_NETBUILDER -DWITH_OSG -DWITH_OSGEARTH -DINET_EXPORT -Wno-overloaded-virtual -include inet/common/precompiled_debug.h  -DINET_EXPORT -I. -IC:/Users/casta/Documents/Omnet/omnetpp-5.4.1/include
+*** LINKING with:
+g++ -shared  -o ../out/gcc-debug/src/libINET_dbg.dll -Wl,--no-as-needed -Wl,--whole-archive  -lws2_32 -Wl,--no-whole-archive -loppenvir_dbg -loppsim_dbg -lstdc++  -lOpenThreads -losg -losgText -losgDB -losgEarth -losgEarthUtil -Wl,-rpath,C:/Users/casta/Documents/Omnet/omnetpp-5.4.1/lib -Wl,-rpath,C:/Users/casta/Documents/Omnet/omnetpp-5.4.1/tools/win64/lib -Wl,-rpath,. -L/usr/bin -L/usr/lib -L/mingw64/lib -shared-libgcc -LC:/Users/casta/Documents/Omnet/omnetpp-5.4.1/lib
+Building...
+make[1]: Nothing to be done for 'all-pch'.
+make[1]: Leaving directory '/c/Users/casta/Documents/Omnet/MySim/inet/src'
+22:51:35 **** Incremental Build of configuration debug for project OPAQS ****
+make MODE=debug all 
+cd src && /usr/bin/make	
+make[1]: Entering directory '/c/Users/casta/Documents/Omnet/MySim/OPAQS/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/c/Users/casta/Documents/Omnet/MySim/OPAQS/src'
+#find simulations/DanT/Logs/ -name "*.txt" -type f -delete
+#rm -r simulations/DanT/DataResults/*
+rm -f simulations/DanT/DataResults/*
+#find simulations/DanT/Logs/ -name "*.txt" -type f -delete
+find simulations/DanT/Logs/ -name "*.txt" -type f -delete
+#rm -r simulations/ElectGW/DataResults/*	
+#find simulations/ElectGW/Logs/ -name "*.txt" -type f -delete
