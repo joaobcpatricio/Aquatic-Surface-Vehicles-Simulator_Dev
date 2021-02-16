@@ -6,7 +6,7 @@ modular architecture where different protocols relevant to opportunistic network
 can be developed and plugged in. OPAQS is a scaled-down, light-weight version.
 
 The stable version is available at my other repository [OPAQS Beta](https://github.com/joaobcpatricio/OPAQS).
-The original version was developed under Ubuntu 16.04. This one is also being developed under the lates version of Windows 10.
+The original version was developed under Ubuntu 16.04. This one is also being developed under the latest version of Windows 10.
 
 The following sections provide details of the models available and about
 the installation. OPAQS is meant to be run in the OMNeT++ IDE and as well as on 
