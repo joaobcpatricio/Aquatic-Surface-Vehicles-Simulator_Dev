@@ -1,0 +1,71 @@
+file 21251 1603226694                                           
+version 2
+run T1-0-20190910-23:34:35-7919
+attr configname T1
+attr datetime 20190910-23:34:35
+attr experiment T1
+attr inifile SimV2.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network NetworkTormV2
+attr processid 7919
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param **.mobility.traceFile "\"paths/T1.movements\""
+param **.numNodes 3
+param **.wirelessIfc.wirelessRange 25m
+param **.bluetoothIfc.wirelessRange 25m
+param **.numNodes 2
+param **.application.usedRNG 1
+param **.application.dataGenerationInterval 1ms
+param **.application.dataSizeInBytes 10
+param **.application.ttl 999999s
+param **application.destinationAddr "\"Wf:00:00:00:00:02\""
+param **application.destinationBTAddr "\"Bt:00:00:00:00:02\""
+param **application.nodesThatGen true
+param **application.nodesGenMsg "\"0\""
+param **application.startMultipleMsg true
+param **application.numMultipleMsg 100
+param **application.hopsListSize 50
+param **.routingLayer "\"RoutingLayer\""
+param **.routing.maximumCacheSize 5000byte
+param **.routing.maximumHopCount 25
+param **.routing.useTTL false
+param **.routing.waitBFsend 0.5
+param **.neighboring.antiEntropyInterval 500ms
+param **.neighboring.maximumRandomBackoffDuration 1s
+param **.neighboring.delayPerDataMsg 0.1
+param **neighboring.usedRNG 2
+param **.neighboring.GWAddr "\"02:00:00:00:00:09\""
+param **.neighboring.sendWifiFirst true
+param **.neighboring.maxLengthGraph 20
+param **.wirelessIfc.wirelessRange 15m
+param **.wirelessIfc.neighbourScanInterval 50ms
+param **.wirelessIfc.bandwidthBitRate 100000bps
+param **.wirelessIfc.wirelessHeaderSize 32byte
+param **.wirelessIfc.minSSI -90
+param **.bluetoothIfc.wirelessRange 15m
+param **.bluetoothIfc.neighbourScanInterval 100ms
+param **.bluetoothIfc.bandwidthBitRate 100000bps
+param **.bluetoothIfc.wirelessHeaderSize 16byte
+param **.bluetoothIfc.minSSI -90
+param **.mobilityType "\"BonnMotionMobility\""
+param **.mobility.traceFile "\"paths/Moves2.movements\""
+param **.mobility.nodeId -1
+
+vector 0 NetworkTormV2 neighbourhoodSize:vector ETV
+attr source neighbourhoodSize
+0	2424 11724 10 4240 0.05 10 900 0 2 762 924
+vector 1 NetworkTormV2 deliveryRatio:vector ETV
+attr source sum(totalDataBytesReceived)/sum(totalDataBytesReceivableByAllNodes)
+1	14148 1658 19 245 0.1 0.199 100 nan nan nan nan
+vector 2 NetworkTormV2 dataBytesReceivedSum:vector ETV
+attr source sum(dataBytesReceived)
+2	15806 2722 974 2375 1.687868379119 3.058028379119 100 141 14100 712050 6726736350
+vector 3 NetworkTormV2 totalBytesReceivedSum:vector ETV
+attr source sum(totalBytesReceived)
+3	18528 2723 974 2375 1.687868379119 3.058028379119 100 141 14100 712050 6726736350

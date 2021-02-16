@@ -1,0 +1,26 @@
+RESULTS FILE 
+Author: João Patrício (castanheirapatricio@ua.pt)
+Started simulation at Tue Sep 17 02:50:00 2019
+elapsed time: 2.71e-07s
+Graph: 
+0->1:39;
+1->0:39;
+Time is : 1.109781 |End 
+Graph: 
+0->1:39;
+1->0:39;
+1->2:39;
+2->1:39;
+Time is : 1.109781 |End 
+Graph: 
+0->1:39;
+1->0:39;
+1->2:39;
+2->1:39;
+Time is : 1.659781 |End 
+Graph: 
+0->1:39;
+1->0:39;
+1->2:39;
+2->1:39;
+Time is : 1.659781 |End 

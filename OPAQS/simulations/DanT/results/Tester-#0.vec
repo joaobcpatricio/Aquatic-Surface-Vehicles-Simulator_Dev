@@ -1,0 +1,320 @@
+version 2
+run Tester-0-20190916-13:09:00-6993
+attr configname Tester
+attr datetime 20190916-13:09:00
+attr experiment Tester
+attr inifile SimV2.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network NetworkTormV2
+attr processid 6993
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param **.mobility.traceFile "\"paths/Tester.movements\""
+param **.numNodes 4
+param **.wirelessIfc.wirelessRange 40m
+param **.bluetoothIfc.wirelessRange 40m
+param **.application.dataGenerationInterval 1s
+param **.application.dataSizeInBytes 10
+param **.application.ttl 999999s
+param **application.destinationAddr "\"Wf:00:00:00:00:02\""
+param **application.destinationBTAddr "\"Bt:00:00:00:00:02\""
+param **application.nodesThatGen true
+param **application.nodesGenMsg "\"0\""
+param **application.startMultipleMsg false
+param **application.numMultipleMsg 100
+param **application.hopsListSize 50
+param **.application.endGeneratingMsg 5s
+param **.numNodes 2
+param **.application.usedRNG 1
+param **.application.dataGenerationInterval 1ms
+param **.application.dataSizeInBytes 10
+param **.application.ttl 999999s
+param **application.destinationAddr "\"Wf:00:00:00:00:02\""
+param **application.destinationBTAddr "\"Bt:00:00:00:00:02\""
+param **application.nodesThatGen true
+param **application.nodesGenMsg "\"0\""
+param **application.startMultipleMsg true
+param **application.numMultipleMsg 100
+param **application.hopsListSize 50
+param **.application.endGeneratingMsg 999999s
+param **.routingLayer "\"RoutingLayer\""
+param **.routing.maximumCacheSize 5000byte
+param **.routing.maximumHopCount 25
+param **.routing.useTTL false
+param **.routing.waitBFsend 0.5
+param **.routing.max_age 999999s
+param **.neighboring.antiEntropyInterval 500ms
+param **.neighboring.maximumRandomBackoffDuration 1s
+param **.neighboring.delayPerDataMsg 0.1
+param **neighboring.usedRNG 2
+param **.neighboring.GWAddr "\"02:00:00:00:00:09\""
+param **.neighboring.sendWifiFirst true
+param **.neighboring.maxLengthGraph 20
+param **.neighboring.max_age 999999s
+param **.wirelessIfc.wirelessRange 15m
+param **.wirelessIfc.neighbourScanInterval 50ms
+param **.wirelessIfc.bandwidthBitRate 100000bps
+param **.wirelessIfc.wirelessHeaderSize 32byte
+param **.wirelessIfc.minSSI -90
+param **.bluetoothIfc.wirelessRange 15m
+param **.bluetoothIfc.neighbourScanInterval 100ms
+param **.bluetoothIfc.bandwidthBitRate 100000bps
+param **.bluetoothIfc.wirelessHeaderSize 16byte
+param **.bluetoothIfc.minSSI -90
+param **.mobilityType "\"BonnMotionMobility\""
+param **.mobility.traceFile "\"paths/Moves2.movements\""
+param **.mobility.is3D false
+param **.mobility.nodeId -1
+
+vector 0 NetworkTormV2 neighbourhoodSize:vector ETV
+attr source neighbourhoodSize
+vector 1 NetworkTormV2 deliveryRatio:vector ETV
+attr source sum(totalDataBytesReceived)/sum(totalDataBytesReceivableByAllNodes)
+vector 2 NetworkTormV2 dataBytesReceivedSum:vector ETV
+attr source sum(dataBytesReceived)
+vector 3 NetworkTormV2 totalBytesReceivedSum:vector ETV
+attr source sum(totalBytesReceived)
+0	13	0.05	3
+0	14	0.05	3
+0	15	0.05	3
+0	16	0.05	3
+0	26	0.1	3
+0	27	0.1	3
+0	28	0.1	3
+0	29	0.1	3
+0	30	0.1	3
+0	31	0.1	3
+0	32	0.1	3
+0	33	0.1	3
+0	51	0.15	3
+0	52	0.15	3
+0	53	0.15	3
+0	54	0.15	3
+0	63	0.2	3
+0	64	0.2	3
+0	65	0.2	3
+0	66	0.2	3
+0	67	0.2	3
+0	68	0.2	3
+0	69	0.2	3
+0	70	0.2	3
+0	87	0.25	3
+0	88	0.25	3
+0	89	0.25	3
+0	90	0.25	3
+0	99	0.3	3
+0	100	0.3	3
+0	101	0.3	3
+0	102	0.3	3
+0	103	0.3	3
+0	104	0.3	3
+0	105	0.3	3
+0	106	0.3	3
+0	123	0.35	3
+0	124	0.35	3
+0	125	0.35	3
+0	126	0.35	3
+0	135	0.4	3
+0	136	0.4	3
+0	137	0.4	3
+0	138	0.4	3
+0	139	0.4	3
+0	140	0.4	3
+0	141	0.4	3
+0	142	0.4	3
+0	159	0.45	3
+0	160	0.45	3
+0	161	0.45	3
+0	162	0.45	3
+0	171	0.5	3
+0	172	0.5	3
+0	173	0.5	3
+0	174	0.5	3
+0	175	0.5	3
+0	176	0.5	3
+0	177	0.5	3
+0	178	0.5	3
+0	195	0.55	3
+0	196	0.55	3
+0	197	0.55	3
+0	198	0.55	3
+0	207	0.6	3
+0	208	0.6	3
+0	209	0.6	3
+0	210	0.6	3
+0	211	0.6	3
+0	212	0.6	3
+0	213	0.6	3
+0	214	0.6	3
+0	231	0.65	3
+0	232	0.65	3
+0	233	0.65	3
+0	234	0.65	3
+0	243	0.7	3
+0	244	0.7	3
+0	245	0.7	3
+0	246	0.7	3
+0	247	0.7	3
+0	248	0.7	3
+0	249	0.7	3
+0	250	0.7	3
+0	267	0.75	3
+0	268	0.75	3
+0	269	0.75	3
+0	270	0.75	3
+0	279	0.8	3
+0	280	0.8	3
+0	281	0.8	3
+0	282	0.8	3
+0	283	0.8	3
+0	284	0.8	3
+0	285	0.8	3
+0	286	0.8	3
+0	303	0.85	3
+0	304	0.85	3
+0	305	0.85	3
+0	306	0.85	3
+0	315	0.9	3
+0	316	0.9	3
+0	317	0.9	3
+0	318	0.9	3
+0	319	0.9	3
+0	320	0.9	3
+0	321	0.9	3
+0	322	0.9	3
+0	339	0.95	3
+0	340	0.95	3
+0	341	0.95	3
+0	342	0.95	3
+0	351	1	3
+0	352	1	3
+0	353	1	3
+0	354	1	3
+0	355	1	3
+0	356	1	3
+0	357	1	3
+0	358	1	3
+0	375	1.05	3
+0	376	1.05	3
+0	377	1.05	3
+0	378	1.05	3
+0	388	1.1	3
+0	389	1.1	3
+0	390	1.1	3
+0	391	1.1	3
+0	392	1.1	3
+0	393	1.1	3
+0	394	1.1	3
+0	395	1.1	3
+0	573	1.15	3
+0	574	1.15	3
+0	575	1.15	3
+0	576	1.15	3
+0	605	1.2	3
+0	606	1.2	3
+0	607	1.2	3
+0	608	1.2	3
+0	609	1.2	3
+0	610	1.2	3
+0	611	1.2	3
+0	612	1.2	3
+0	629	1.25	3
+0	630	1.25	3
+0	631	1.25	3
+0	632	1.25	3
+0	641	1.3	3
+0	642	1.3	3
+0	643	1.3	3
+0	644	1.3	3
+0	645	1.3	3
+0	646	1.3	3
+0	647	1.3	3
+0	648	1.3	3
+0	665	1.35	3
+0	666	1.35	3
+0	667	1.35	3
+0	668	1.35	3
+0	677	1.4	3
+0	678	1.4	3
+0	679	1.4	3
+0	680	1.4	3
+0	681	1.4	3
+0	682	1.4	3
+0	683	1.4	3
+0	684	1.4	3
+0	701	1.45	3
+0	702	1.45	3
+0	703	1.45	3
+0	704	1.45	3
+0	713	1.5	3
+0	714	1.5	3
+0	715	1.5	3
+0	716	1.5	3
+0	717	1.5	3
+0	718	1.5	3
+0	719	1.5	3
+0	720	1.5	3
+0	737	1.55	3
+0	738	1.55	3
+0	739	1.55	3
+0	740	1.55	3
+0	749	1.6	3
+0	750	1.6	3
+0	751	1.6	3
+0	752	1.6	3
+0	753	1.6	3
+0	754	1.6	3
+0	755	1.6	3
+0	756	1.6	3
+0	773	1.65	3
+0	774	1.65	3
+0	775	1.65	3
+0	776	1.65	3
+0	941	1.7	3
+0	942	1.7	3
+0	943	1.7	3
+0	944	1.7	3
+0	945	1.7	3
+0	946	1.7	3
+0	947	1.7	3
+0	948	1.7	3
+0	965	1.75	3
+0	966	1.75	3
+0	967	1.75	3
+0	968	1.75	3
+0	977	1.8	3
+0	978	1.8	3
+0	979	1.8	3
+0	980	1.8	3
+0	981	1.8	3
+0	982	1.8	3
+0	983	1.8	3
+0	984	1.8	3
+0	1001	1.85	3
+0	1002	1.85	3
+0	1003	1.85	3
+0	1004	1.85	3
+0	1013	1.9	3
+0	1014	1.9	3
+0	1015	1.9	3
+0	1016	1.9	3
+0	1017	1.9	3
+0	1018	1.9	3
+0	1019	1.9	3
+0	1020	1.9	3
+0	1037	1.95	3
+0	1038	1.95	3
+0	1039	1.95	3
+0	1040	1.95	3
+1	25	0.1	-nan
+1	387	1.1	-nan
+2	588	1.156853692369	141
+2	598	1.170693692369	282
+3	588	1.156853692369	141
+3	598	1.170693692369	282
+

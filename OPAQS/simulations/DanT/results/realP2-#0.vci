@@ -1,0 +1,100 @@
+file 11635456 1603226694                                        
+version 2
+run realP2-0-20191115-03:46:33-19820
+attr configname realP2
+attr datetime 20191115-03:46:33
+attr experiment realP2
+attr inifile GwSimV2.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network NetworkTormV2
+attr processid 19820
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param **.mobility.traceFile "\"AllPaths/mobPaths/realP2.movements\""
+param **.numNodes 12
+param **.application.dataGenerationInterval 1s
+param **.application.dataSizeInBytes 10
+param **.application.ttl 999999s
+param **application.nodesThatGen false
+param **application.nodesGenMsg "\"\""
+param **application.startMultipleMsg false
+param **application.numMultipleMsg 100
+param **application.hopsListSize 50
+param **.application.endGeneratingMsg 539s
+param **.routingLayer "\"RoutingLqeGw\""
+param **.routing.maximumCacheSize 5000byte
+param **.routing.maximumHopCount 25
+param **.routing.useTTL false
+param **.routing.waitBFsend 0.1
+param **.routing.max_age 999999s
+param **.routing.gateway_list "\"\""
+param **.routing.actual_gateway "\"\""
+param **.routing.gwCheckPeriod 5s
+param **.neighboring.resetGPeriod 999s
+param **.wirelessIfc.wirelessRange 40m
+param **.numNodes 2
+param **.application.usedRNG 1
+param **.application.dataGenerationInterval 1s
+param **.application.dataSizeInBytes 10
+param **.application.ttl 999999s
+param **application.destinationAddr "\"Wf:00:00:00:00:02\""
+param **application.destinationBTAddr "\"Bt:00:00:00:00:02\""
+param **application.nodesThatGen true
+param **application.nodesGenMsg "\"0\""
+param **application.startMultipleMsg true
+param **application.numMultipleMsg 100
+param **application.hopsListSize 50
+param **.application.endGeneratingMsg 999999s
+param **.routingLayer "\"RoutingLqeGw\""
+param **.routing.maximumCacheSize 5000byte
+param **.routing.maximumHopCount 25
+param **.routing.useTTL false
+param **.routing.waitBFsend 0.1
+param **.routing.max_age 999999s
+param **.routing.gateway_list "\"\""
+param **.routing.actual_gateway "\"\""
+param **.routing.gwCheckPeriod 5s
+param **.neighboring.antiEntropyInterval 500ms
+param **.neighboring.maximumRandomBackoffDuration 1s
+param **.neighboring.delayPerDataMsg 0.1
+param **neighboring.usedRNG 2
+param **.neighboring.GWAddr "\"Wf:00:00:00:00:02\""
+param **.neighboring.sendWifiFirst true
+param **.neighboring.maxLengthGraph 20
+param **.neighboring.max_age 999999s
+param **.neighboring.max_absent_time 1s
+param **.wirelessIfc.wirelessRange 40m
+param **.wirelessIfc.neighbourScanInterval 50ms
+param **.wirelessIfc.bandwidthBitRate 100000bps
+param **.wirelessIfc.wirelessHeaderSize 32byte
+param **.wirelessIfc.minSSI -90
+param **.wirelessIfc.limitQueueTime 400ms
+param **.wirelessIfc.my_limit_rate 0bps
+param **.bluetoothIfc.wirelessRange 40m
+param **.bluetoothIfc.neighbourScanInterval 100ms
+param **.bluetoothIfc.bandwidthBitRate 100000bps
+param **.bluetoothIfc.wirelessHeaderSize 16byte
+param **.bluetoothIfc.minSSI -90
+param **.mobilityType "\"BonnMotionMobility\""
+param **.mobility.traceFile "\"paths/Moves2.movements\""
+param **.mobility.is3D false
+param **.mobility.nodeId -1
+
+vector 0 NetworkTormV2 neighbourhoodSize:vector ETV
+attr source neighbourhoodSize
+0	3516 4839947 37 3262182 0.05 757.9 272844 0 9 968854 4630376
+0	6178515 5456941 3262377 6613423 757.95 1560 288756 0 9 1369238 7697132
+vector 1 NetworkTormV2 deliveryRatio:vector ETV
+attr source sum(totalDataBytesReceived)/sum(totalDataBytesReceivableByAllNodes)
+1	4843463 131856 145 2460272 0.1 539.1 6480 nan nan nan nan
+vector 2 NetworkTormV2 dataBytesReceivedSum:vector ETV
+attr source sum(dataBytesReceived)
+2	4975319 601598 67224 2662144 11.03342031478 582.070847187017 17582 141 2479062 21794673573 3.602125572114e+016
+vector 3 NetworkTormV2 totalBytesReceivedSum:vector ETV
+attr source sum(totalBytesReceived)
+3	5576917 601598 67224 2662144 11.03342031478 582.070847187017 17582 141 2479062 21794673573 3.602125572114e+016
