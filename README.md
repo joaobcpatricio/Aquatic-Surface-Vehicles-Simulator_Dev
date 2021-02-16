@@ -12,6 +12,7 @@ The following sections provide details of the models available and about
 the installation. OPAQS is meant to be run in the OMNeT++ IDE and as well as on 
 the command-line**.
 
+![Graphical example](res/OPAQS.gif)
 
 ## Prerequisites
 

@@ -1,15 +1,15 @@
-file 1503981 1603226694                                         
+file 376668 1613519294                                          
 version 2
-run realP1-0-20191113-15:11:39-9434
+run realP1-0-20210216-23:42:26-11640
 attr configname realP1
-attr datetime 20191113-15:11:39
+attr datetime 20210216-23:42:26
 attr experiment realP1
-attr inifile GwSimV2.ini
+attr inifile GwSimV3_2021.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network NetworkTormV2
-attr processid 9434
+attr processid 11640
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -65,9 +65,9 @@ param **.neighboring.delayPerDataMsg 0.1
 param **neighboring.usedRNG 2
 param **.neighboring.GWAddr "\"Wf:00:00:00:00:02\""
 param **.neighboring.sendWifiFirst true
-param **.neighboring.maxLengthGraph 20
 param **.neighboring.max_age 999999s
 param **.neighboring.max_absent_time 1s
+param **.neighboring.maxLengthGraph 15
 param **.wirelessIfc.wirelessRange 40m
 param **.wirelessIfc.neighbourScanInterval 50ms
 param **.wirelessIfc.bandwidthBitRate 100000bps
@@ -87,21 +87,18 @@ param **.mobility.nodeId -1
 
 vector 0 NetworkTormV2 neighbourhoodSize:vector ETV
 attr source neighbourhoodSize
-0	3513 29975 16 22248 0.05 14.3 2145 2 4 6006 18018
-0	36469 209370 22463 164041 14.35 103.1 13320 1 4 30520 80082
-0	282508 934220 164122 723431 103.15 465.2 54315 0 2 72542 111230
 vector 1 NetworkTormV2 deliveryRatio:vector ETV
 attr source sum(totalDataBytesReceived)/sum(totalDataBytesReceivableByAllNodes)
-1	33488 1255 61 21932 0.1 14.1 75 nan nan nan nan
-1	245839 8245 23812 164026 15.1 103.1 445 nan nan nan nan
-1	1216728 36200 165536 723276 104.1 465.1 1810 nan nan nan nan
 vector 2 NetworkTormV2 dataBytesReceivedSum:vector ETV
 attr source sum(dataBytesReceived)
-2	34743 863 18649 22381 12.152897643805 14.325430996648 30 141 4230 65565 187974855
-2	254084 14212 22458 163185 14.348194624913 102.483511186651 470 4371 70500 17594685 830673806895
-2	1252928 125526 164552 723191 103.43342031478 465.016163817206 3837 70641 611517 1308720123 5.3996757579968e+014
 vector 3 NetworkTormV2 totalBytesReceivedSum:vector ETV
 attr source sum(totalBytesReceived)
-3	35606 863 18649 22381 12.152897643805 14.325430996648 30 141 4230 65565 187974855
-3	268296 14212 22458 163185 14.348194624913 102.483511186651 470 4371 70500 17594685 830673806895
-3	1378454 125527 164552 723191 103.43342031478 465.016163817206 3837 70641 611517 1308720123 5.3996757579968e+014
+0	3614 150425 16 103850 0.05 62.85 9425 2 4 26390 79170
+1	154039 5585 61 102565 0.1 62.1 315 nan nan nan nan
+2	159624 10478 16959 102974 11.052834624913 62.202827908865 340 141 47940 8173770 261617856390
+3	170102 10478 16959 102974 11.052834624913 62.202827908865 340 141 47940 8173770 261617856390
+0	180580 174795 103891 201195 62.9 128.9 9910 1 4 16328 29766
+1	355375 6415 104119 199967 63.1 128.1 330 nan nan nan nan
+2	361790 7438 104537 200383 63.298183936469 128.283910996648 231 48081 80511 14852376 975369732876
+3	369228 7438 104537 200383 63.298183936469 128.283910996648 231 48081 80511 14852376 975369732876
+

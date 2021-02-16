@@ -1,14 +1,14 @@
 version 2
-run realP1-0-20191113-15:11:39-9434
+run realP1-0-20210216-23:42:26-11640
 attr configname realP1
-attr datetime 20191113-15:11:39
+attr datetime 20210216-23:42:26
 attr experiment realP1
-attr inifile GwSimV2.ini
+attr inifile GwSimV3_2021.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network NetworkTormV2
-attr processid 9434
+attr processid 11640
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -64,9 +64,9 @@ param **.neighboring.delayPerDataMsg 0.1
 param **neighboring.usedRNG 2
 param **.neighboring.GWAddr "\"Wf:00:00:00:00:02\""
 param **.neighboring.sendWifiFirst true
-param **.neighboring.maxLengthGraph 20
 param **.neighboring.max_age 999999s
 param **.neighboring.max_absent_time 1s
+param **.neighboring.maxLengthGraph 15
 param **.wirelessIfc.wirelessRange 40m
 param **.wirelessIfc.neighbourScanInterval 50ms
 param **.wirelessIfc.bandwidthBitRate 100000bps
@@ -84,78 +84,78 @@ param **.mobility.traceFile "\"paths/Moves2.movements\""
 param **.mobility.is3D false
 param **.mobility.nodeId -1
 
-scalar NetworkTormV2.node[0].routing numEventsHandled 22968
-scalar NetworkTormV2.node[0].neighboring numEventsHandled 40914
-scalar NetworkTormV2.node[1].routing numEventsHandled 23112
-scalar NetworkTormV2.node[1].neighboring numEventsHandled 40896
-scalar NetworkTormV2.node[2].routing numEventsHandled 24704
-scalar NetworkTormV2.node[2].neighboring numEventsHandled 42385
-scalar NetworkTormV2.node[3].routing numEventsHandled 26381
-scalar NetworkTormV2.node[3].neighboring numEventsHandled 47476
-scalar NetworkTormV2.node[4].routing numEventsHandled 22822
-scalar NetworkTormV2.node[4].neighboring numEventsHandled 40152
-scalar NetworkTormV2 neighbourhoodSize:min 0
+scalar NetworkTormV2.node[0].routing numEventsHandled 6267
+scalar NetworkTormV2.node[0].neighboring numEventsHandled 11023
+scalar NetworkTormV2.node[1].routing numEventsHandled 6891
+scalar NetworkTormV2.node[1].neighboring numEventsHandled 12408
+scalar NetworkTormV2.node[2].routing numEventsHandled 6873
+scalar NetworkTormV2.node[2].neighboring numEventsHandled 12301
+scalar NetworkTormV2.node[3].routing numEventsHandled 7198
+scalar NetworkTormV2.node[3].neighboring numEventsHandled 12919
+scalar NetworkTormV2.node[4].routing numEventsHandled 6399
+scalar NetworkTormV2.node[4].neighboring numEventsHandled 11226
+scalar NetworkTormV2 neighbourhoodSize:min 1
 attr source neighbourhoodSize
 scalar NetworkTormV2 neighbourhoodSize:max 4
 attr source neighbourhoodSize
-scalar NetworkTormV2 neighbourhoodSize:mean 1.5630266552021
+scalar NetworkTormV2 neighbourhoodSize:mean 2.2093612619602
 attr source neighbourhoodSize
-scalar NetworkTormV2 totalBytesReceivedSum:max 611517
+scalar NetworkTormV2 totalBytesReceivedSum:max 80511
 attr source sum(totalBytesReceived)
-scalar NetworkTormV2 totalBytesReceivedSum:last 611517
+scalar NetworkTormV2 totalBytesReceivedSum:last 80511
 attr source sum(totalBytesReceived)
-scalar NetworkTormV2 dataReqBytesReceivedSum:max -nan
+scalar NetworkTormV2 dataReqBytesReceivedSum:max nan
 attr source sum(dataReqBytesReceived)
-scalar NetworkTormV2 dataReqBytesReceivedSum:last -nan
+scalar NetworkTormV2 dataReqBytesReceivedSum:last nan
 attr source sum(dataReqBytesReceived)
-scalar NetworkTormV2 sumVecBytesReceivedSum:max -nan
+scalar NetworkTormV2 sumVecBytesReceivedSum:max nan
 attr source sum(sumVecBytesReceived)
-scalar NetworkTormV2 sumVecBytesReceivedSum:last -nan
+scalar NetworkTormV2 sumVecBytesReceivedSum:last nan
 attr source sum(sumVecBytesReceived)
-scalar NetworkTormV2 dataBytesReceivedSum:max 611517
+scalar NetworkTormV2 dataBytesReceivedSum:max 80511
 attr source sum(dataBytesReceived)
-scalar NetworkTormV2 dataBytesReceivedSum:last 611517
+scalar NetworkTormV2 dataBytesReceivedSum:last 80511
 attr source sum(dataBytesReceived)
-scalar NetworkTormV2 deliveryRatio:max -nan
+scalar NetworkTormV2 deliveryRatio:max nan
 attr source sum(totalDataBytesReceived)/sum(totalDataBytesReceivableByAllNodes)
-scalar NetworkTormV2 deliveryRatio:min -nan
+scalar NetworkTormV2 deliveryRatio:min nan
 attr source sum(totalDataBytesReceived)/sum(totalDataBytesReceivableByAllNodes)
-scalar NetworkTormV2 dataDelay:max -nan
+scalar NetworkTormV2 dataDelay:max nan
 attr source dataDelay
-scalar NetworkTormV2 dataDelay:min -nan
+scalar NetworkTormV2 dataDelay:min nan
 attr source dataDelay
-scalar NetworkTormV2 dataDelay:mean -nan
+scalar NetworkTormV2 dataDelay:mean nan
 attr source dataDelay
 statistic NetworkTormV2 dataDelay:histogram
 field count 0
-field mean -nan
-field stddev -nan
-field min -nan
-field max -nan
+field mean nan
+field stddev nan
+field min nan
+field max nan
 field sum 0
 field sqrsum 0
 attr source dataDelay
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar NetworkTormV2 nonLikedDataBytesReceivableByAllNodesSum:max -nan
+scalar NetworkTormV2 nonLikedDataBytesReceivableByAllNodesSum:max nan
 attr source sum(nonLikedDataBytesReceivableByAllNodes)
-scalar NetworkTormV2 nonLikedDataBytesReceivableByAllNodesSum:last -nan
+scalar NetworkTormV2 nonLikedDataBytesReceivableByAllNodesSum:last nan
 attr source sum(nonLikedDataBytesReceivableByAllNodes)
-scalar NetworkTormV2 likedDataBytesReceivableByAllNodesSum:max -nan
+scalar NetworkTormV2 likedDataBytesReceivableByAllNodesSum:max nan
 attr source sum(likedDataBytesReceivableByAllNodes)
-scalar NetworkTormV2 likedDataBytesReceivableByAllNodesSum:last -nan
+scalar NetworkTormV2 likedDataBytesReceivableByAllNodesSum:last nan
 attr source sum(likedDataBytesReceivableByAllNodes)
-scalar NetworkTormV2 duplicateDataBytesReceivedSum:max -nan
+scalar NetworkTormV2 duplicateDataBytesReceivedSum:max nan
 attr source sum(duplicateDataBytesReceived)
-scalar NetworkTormV2 duplicateDataBytesReceivedSum:last -nan
+scalar NetworkTormV2 duplicateDataBytesReceivedSum:last nan
 attr source sum(duplicateDataBytesReceived)
-scalar NetworkTormV2 nonLikedDataBytesReceivedSum:max -nan
+scalar NetworkTormV2 nonLikedDataBytesReceivedSum:max nan
 attr source sum(nonLikedDataBytesReceived)
-scalar NetworkTormV2 nonLikedDataBytesReceivedSum:last -nan
+scalar NetworkTormV2 nonLikedDataBytesReceivedSum:last nan
 attr source sum(nonLikedDataBytesReceived)
-scalar NetworkTormV2 likedDataBytesReceivedSum:max -nan
+scalar NetworkTormV2 likedDataBytesReceivedSum:max nan
 attr source sum(likedDataBytesReceived)
-scalar NetworkTormV2 likedDataBytesReceivedSum:last -nan
+scalar NetworkTormV2 likedDataBytesReceivedSum:last nan
 attr source sum(likedDataBytesReceived)
 
