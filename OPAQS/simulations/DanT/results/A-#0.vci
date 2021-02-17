@@ -1,21 +1,21 @@
-file 108777 1613515405                                          
+file 108664 1613601506                                          
 version 2
-run A-0-20210216-22:43:15-3872
+run A-0-20210217-22:38:17-17012
 attr configname A
-attr datetime 20210216-22:43:15
+attr datetime 20210217-22:38:17
 attr experiment A
 attr inifile GwSimV3_2021.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network NetworkTormV2
-attr processid 3872
+attr processid 17012
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
-param **.mobility.traceFile "\"AllPaths/mobPaths/A.movements\""
+param **.mobility.traceFile "\"AllPaths/paths_dev/opaqs_A.movements\""
 param **.numNodes 2
 param **.application.dataGenerationInterval 1s
 param **.application.dataSizeInBytes 10
@@ -93,8 +93,8 @@ vector 2 NetworkTormV2 dataBytesReceivedSum:vector ETV
 attr source sum(dataBytesReceived)
 vector 3 NetworkTormV2 totalBytesReceivedSum:vector ETV
 attr source sum(totalBytesReceived)
-0	3591 95344 7 52451 0.05 100 6000 1 1 6000 6000
-1	98935 3534 25 52008 0.1 99.1 200 nan nan nan nan
-2	102469 3153 5409 52442 10.483429964638 99.997466728067 105 141 14805 784665 7781522805
-3	105622 3153 5409 52442 10.483429964638 99.997466728067 105 141 14805 784665 7781522805
+0	3600 95346 7 53028 0.05 100 6000 1 1 6000 6000
+1	98946 3534 25 52529 0.1 99.1 200 nan nan nan nan
+2	102480 3091 5698 52630 11.033431093679 99.233626728067 103 141 14523 755196 7347301884
+3	105571 3091 5698 52630 11.033431093679 99.233626728067 103 141 14523 755196 7347301884
 
