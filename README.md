@@ -234,7 +234,9 @@ If you have any question or clarifications related to OMNeT++, please check the 
 - Solution: Change the configure.user file to use gcc by setting "PREFER_CLANG=no" and rebuilding OMNeT++ and all the models installed (including INET). Check [Install Guide](https://www.omnetpp.org/doc/omnetpp/InstallGuide.pdf) for further information.
 
 
-
+### Problem: Qtenv/GUI not showing up
+- Description: When you run the graphical environment does not show up.
+- Solution: delete the file ".qtenvrc" that should be on your user's main folder e.g.:"C:\Users\username". It will reset the configurations and delete possible errors.
 
 ## Questions or Comments
 
