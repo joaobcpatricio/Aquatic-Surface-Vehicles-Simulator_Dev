@@ -1,14 +1,14 @@
 version 2
-run A-0-20210306-19:47:11-14580
+run A-0-20210307-03:17:16-11120
 attr configname A
-attr datetime 20210306-19:47:11
+attr datetime 20210307-03:17:16
 attr experiment A
 attr inifile GwSimV3_2021.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network NetworkTormV2
-attr processid 14580
+attr processid 11120
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -84,19 +84,19 @@ param **.mobility.traceFile "\"paths/Moves2.movements\""
 param **.mobility.is3D false
 param **.mobility.nodeId -1
 
-scalar NetworkTormV2.node[0].routing numEventsHandled 4
-scalar NetworkTormV2.node[0].neighboring numEventsHandled 3
-scalar NetworkTormV2.node[1].routing numEventsHandled 4
-scalar NetworkTormV2.node[1].neighboring numEventsHandled 3
+scalar NetworkTormV2.node[0].routing numEventsHandled 790
+scalar NetworkTormV2.node[0].neighboring numEventsHandled 1373
+scalar NetworkTormV2.node[1].routing numEventsHandled 789
+scalar NetworkTormV2.node[1].neighboring numEventsHandled 1362
 scalar NetworkTormV2 neighbourhoodSize:min 1
 attr source neighbourhoodSize
 scalar NetworkTormV2 neighbourhoodSize:max 1
 attr source neighbourhoodSize
 scalar NetworkTormV2 neighbourhoodSize:mean 1
 attr source neighbourhoodSize
-scalar NetworkTormV2 totalBytesReceivedSum:max nan
+scalar NetworkTormV2 totalBytesReceivedSum:max 2397
 attr source sum(totalBytesReceived)
-scalar NetworkTormV2 totalBytesReceivedSum:last nan
+scalar NetworkTormV2 totalBytesReceivedSum:last 2397
 attr source sum(totalBytesReceived)
 scalar NetworkTormV2 dataReqBytesReceivedSum:max nan
 attr source sum(dataReqBytesReceived)
@@ -106,9 +106,9 @@ scalar NetworkTormV2 sumVecBytesReceivedSum:max nan
 attr source sum(sumVecBytesReceived)
 scalar NetworkTormV2 sumVecBytesReceivedSum:last nan
 attr source sum(sumVecBytesReceived)
-scalar NetworkTormV2 dataBytesReceivedSum:max nan
+scalar NetworkTormV2 dataBytesReceivedSum:max 2397
 attr source sum(dataBytesReceived)
-scalar NetworkTormV2 dataBytesReceivedSum:last nan
+scalar NetworkTormV2 dataBytesReceivedSum:last 2397
 attr source sum(dataBytesReceived)
 scalar NetworkTormV2 deliveryRatio:max nan
 attr source sum(totalDataBytesReceived)/sum(totalDataBytesReceivableByAllNodes)

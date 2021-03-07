@@ -38,13 +38,23 @@
 using namespace omnetpp;
 using namespace std;
 
+//
+#ifdef WINDOWS
+#include <direct.h>
+#define GetCurrentDir _getcwd
+#else
+#include <unistd.h>
+#define GetCurrentDir getcwd
+#endif
+//////
+
 class Logger{
 public:
     Logger();
     ~Logger();
 
     string ownAddress = "Wf:00:00:00:00:02";
-
+    std::string get_current_dir();
     void initialize(string ownMACAddress);
     //--Neighboring----
     //Ener
