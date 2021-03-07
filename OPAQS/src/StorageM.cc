@@ -101,7 +101,9 @@ bool StorageM::saveData(cMessage *msg, int origin, bool reachedGW){
     if (!found) {
 
         //Save saved 1st time msgs
-        string nameF="/home/mob/Tese/Boat/OPAQS/simulations/DanT/DataResults/ResultsStor";
+        std::string pathH = get_current_dir();
+        std::string nameF = pathH + "\\DataResults\\ResultsStor";
+//        string nameF="/home/mob/Tese/Boat/OPAQS/simulations/DanT/DataResults/ResultsStor";
         string ownMACAddress;
         if(origin){
             ownMACAddress = omnetDataMsg->getDestinationAddress();
@@ -150,8 +152,9 @@ bool StorageM::saveData(cMessage *msg, int origin, bool reachedGW){
 
                    if(origin){
                        ownMACAddress = omnetDataMsg->getDestinationAddress();
-                       string destMACAddress=omnetDataMsg->getOriginatorNodeMAC() ;
-                       string nameFInd="/home/mob/Tese/Boat/OPAQS/simulations/DanT/DataResults/ResultsStorInd";
+                       string destMACAddress=omnetDataMsg->getOriginatorNodeMAC();
+                       std::string nameFInd = pathH + "\\DataResults\\ResultsStorInd";
+//                       string nameFInd="/home/mob/Tese/Boat/OPAQS/simulations/DanT/DataResults/ResultsStorInd";
                        string nMY=ownMACAddress.substr(15,17);
                        string nD=destMACAddress.substr(15,17);
                        nameFInd.append(nMY);
@@ -298,43 +301,47 @@ bool StorageM::saveData(cMessage *msg, int origin, bool reachedGW){
 void StorageM::saveResultsStorTimeRec(cMessage *msg,int origin ){
     DataMsg *omnetDataMsg = dynamic_cast<DataMsg*>(msg);
     //Save saved 1st time msgs
-            string nameF="/home/mob/Tese/Boat/OPAQS/simulations/DanT/DataResults/timeRec";
-            string ownMACAddress;
-            if(origin){
-                ownMACAddress = omnetDataMsg->getDestinationAddress();
-            }else{
-                ownMACAddress = omnetDataMsg->getOriginatorNodeMAC();
-            }
-                       string noS=ownMACAddress.substr(15,17);
-                       nameF.append(noS);
-                       nameF.append(".txt");
-                       std::ofstream out(nameF, std::ios_base::app);
-                       std::string timeRMsg = std::to_string(omnetDataMsg->getReceivedTimeRout().dbl());//getReceivedTime().dbl());
-                       string timeRec=timeRMsg;
-                       timeRec.append("\n");
-                       out<<timeRec;
-                       out.close();
+    std::string pathH = get_current_dir();
+    std::string nameF = pathH + "\\DataResults\\timeRec";
+    //            string nameF="/home/mob/Tese/Boat/OPAQS/simulations/DanT/DataResults/timeRec";
+    string ownMACAddress;
+    if(origin){
+        ownMACAddress = omnetDataMsg->getDestinationAddress();
+    }else{
+        ownMACAddress = omnetDataMsg->getOriginatorNodeMAC();
+    }
+    string noS=ownMACAddress.substr(15,17);
+    nameF.append(noS);
+    nameF.append(".txt");
+    std::ofstream out(nameF, std::ios_base::app);
+    std::string timeRMsg = std::to_string(omnetDataMsg->getReceivedTimeRout().dbl());//getReceivedTime().dbl());
+    string timeRec=timeRMsg;
+    timeRec.append("\n");
+    out<<timeRec;
+    out.close();
 }
 void StorageM::saveResultsStorTimeSent(cMessage *msg,int origin ){
     DataMsg *omnetDataMsg = dynamic_cast<DataMsg*>(msg);
     //Save saved 1st time msgs
-            string nameF="/home/mob/Tese/Boat/OPAQS/simulations/DanT/DataResults/timeSent";
-            string ownMACAddress;
-            if(origin){
-                ownMACAddress = omnetDataMsg->getDestinationAddress();
-            }else{
-                ownMACAddress = omnetDataMsg->getOriginatorNodeMAC();
-            }
-                       string noS=ownMACAddress.substr(15,17);
-                       nameF.append(noS);
-                       nameF.append(".txt");
-                       std::ofstream out(nameF, std::ios_base::app);
-                       //Time sent from src
-                       std::string timeSMsg = std::to_string(omnetDataMsg->getSentTimeRout().dbl());//getInjectedTime().dbl());
-                       string timeSSrc=timeSMsg;
-                       timeSSrc.append("\n");
-                       out<<timeSSrc;
-                       out.close();
+    std::string pathH = get_current_dir();
+    std::string nameF = pathH + "\\DataResults\\timeSent";
+    //            string nameF="/home/mob/Tese/Boat/OPAQS/simulations/DanT/DataResults/timeSent";
+    string ownMACAddress;
+    if(origin){
+        ownMACAddress = omnetDataMsg->getDestinationAddress();
+    }else{
+        ownMACAddress = omnetDataMsg->getOriginatorNodeMAC();
+    }
+    string noS=ownMACAddress.substr(15,17);
+    nameF.append(noS);
+    nameF.append(".txt");
+    std::ofstream out(nameF, std::ios_base::app);
+    //Time sent from src
+    std::string timeSMsg = std::to_string(omnetDataMsg->getSentTimeRout().dbl());//getInjectedTime().dbl());
+    string timeSSrc=timeSMsg;
+    timeSSrc.append("\n");
+    out<<timeSSrc;
+    out.close();
 }
 
 
@@ -579,7 +586,9 @@ int StorageM::cacheListSize(){
 
 void StorageM::saveMsgReachedGw(string dataName, double time, string myAddr, int nHops){
     //save info into file
-    string nameF="/home/mob/Tese/Boat/OPAQS/simulations/DanT/Logs/GW/ReachedGwName";
+    std::string pathH = get_current_dir();
+    std::string nameF = pathH + "\\Logs\\GW\\ReachedGwName";
+//    string nameF="/home/mob/Tese/Boat/OPAQS/simulations/DanT/Logs/GW/ReachedGwName";
     nameF.append(".txt");
     std::ofstream out(nameF, std::ios_base::app);
     //Name of data
@@ -589,7 +598,8 @@ void StorageM::saveMsgReachedGw(string dataName, double time, string myAddr, int
     out.close();
 
     //save info into file
-    string nameS="/home/mob/Tese/Boat/OPAQS/simulations/DanT/Logs/GW/GwTimeSent";
+    std::string nameS = pathH + "\\Logs\\GW\\GwTimeSent";
+//    string nameS="/home/mob/Tese/Boat/OPAQS/simulations/DanT/Logs/GW/GwTimeSent";
     nameS.append(".txt");
     std::ofstream outs(nameS, std::ios_base::app);
     //time of data sent
@@ -601,7 +611,8 @@ void StorageM::saveMsgReachedGw(string dataName, double time, string myAddr, int
 
 
     //save info into file
-    string nameFe="/home/mob/Tese/Boat/OPAQS/simulations/DanT/Logs/GW/GwTimeRec";
+    std::string nameFe = pathH + "\\Logs\\GW\\GwTimeRec";
+//    string nameFe="/home/mob/Tese/Boat/OPAQS/simulations/DanT/Logs/GW/GwTimeRec";
     nameFe.append(".txt");
     std::ofstream oute(nameFe, std::ios_base::app);
     //time of data rec
@@ -611,7 +622,8 @@ void StorageM::saveMsgReachedGw(string dataName, double time, string myAddr, int
     oute<<timeGen;
     oute.close();
 
-    string nameFa="/home/mob/Tese/Boat/OPAQS/simulations/DanT/Logs/GW/ReachedGwSpcs";
+    std::string nameFa = pathH + "\\Logs\\GW\\ReachedGwSpcs";
+//    string nameFa="/home/mob/Tese/Boat/OPAQS/simulations/DanT/Logs/GW/ReachedGwSpcs";
     nameFa.append(".txt");
     std::ofstream outA(nameFa, std::ios_base::app);
     //GW
@@ -621,29 +633,30 @@ void StorageM::saveMsgReachedGw(string dataName, double time, string myAddr, int
     outA<<addri;
     outA.close();
 
-
-    string nameFer="/home/mob/Tese/Boat/OPAQS/simulations/DanT/Logs/GW/Gws/GwTimeRec";
+    std::string nameFer = pathH + "\\Logs\\GW\\Gws\\GwTimeRec";
+//    string nameFer="/home/mob/Tese/Boat/OPAQS/simulations/DanT/Logs/GW/Gws/GwTimeRec";
     string noSr=myAddr.substr(15,17);
     nameFer.append(noSr);
     nameFer.append(".txt");
-        std::ofstream outer(nameFer, std::ios_base::app);
-        //time of data rec
-        std::string timeMsgr = std::to_string(simTime().dbl());//getInjectedTime().dbl());
-        string timeGenr=timeMsgr;
-        timeGenr.append("\n");
-        outer<<timeGenr;
-        outer.close();
+    std::ofstream outer(nameFer, std::ios_base::app);
+    //time of data rec
+    std::string timeMsgr = std::to_string(simTime().dbl());//getInjectedTime().dbl());
+    string timeGenr=timeMsgr;
+    timeGenr.append("\n");
+    outer<<timeGenr;
+    outer.close();
 
 
-        //save number of hops of Msg received
-                string nameHop="/home/mob/Tese/Boat/OPAQS/simulations/DanT/Logs/GW/Gws/GwMsgHops";
-                nameHop.append(".txt");
-                std::ofstream outhop(nameHop, std::ios_base::app);
-                //Hops
-                std::string nHop = std::to_string(nHops);//getInjectedTime().dbl());
-                nHop.append("\n");
-                outhop<<nHop;
-                outhop.close();
+    //save number of hops of Msg received
+    std::string nameHop = pathH + "\\Logs\\GW\\Gws\\GwMsgHops";
+    //                string nameHop="/home/mob/Tese/Boat/OPAQS/simulations/DanT/Logs/GW/Gws/GwMsgHops";
+    nameHop.append(".txt");
+    std::ofstream outhop(nameHop, std::ios_base::app);
+    //Hops
+    std::string nHop = std::to_string(nHops);//getInjectedTime().dbl());
+    nHop.append("\n");
+    outhop<<nHop;
+    outhop.close();
 
 
 
@@ -651,6 +664,13 @@ void StorageM::saveMsgReachedGw(string dataName, double time, string myAddr, int
 
 }
 
+
+std::string StorageM::get_current_dir() {
+   char buff[FILENAME_MAX]; //create string buffer to hold path
+   GetCurrentDir( buff, FILENAME_MAX );
+   string current_working_dir(buff);
+   return current_working_dir;
+}
 
 /**********************************************************************************************************
  *Deletes a message on the Storage list

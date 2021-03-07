@@ -78,27 +78,3 @@ Num. Msg: Test: 14 Node Index: Node Index: 0 Time: 12.1
 
  Running
 Num. Msg: Test: 14 Node Index: Node Index: 1 Time: 12.1
-
- Running
-Num. Msg: Test: 15 Node Index: Node Index: 0 Time: 13.1
-
- Running
-Num. Msg: Test: 15 Node Index: Node Index: 1 Time: 13.1
-
- Running
-Num. Msg: Test: 16 Node Index: Node Index: 0 Time: 14.1
-
- Running
-Num. Msg: Test: 16 Node Index: Node Index: 1 Time: 14.1
-
- Running
-Num. Msg: Test: 17 Node Index: Node Index: 0 Time: 15.1
-
- Running
-Num. Msg: Test: 17 Node Index: Node Index: 1 Time: 15.1
-
- Running
-Num. Msg: Test: 18 Node Index: Node Index: 0 Time: 16.1
-
- Running
-Num. Msg: Test: 18 Node Index: Node Index: 1 Time: 16.1

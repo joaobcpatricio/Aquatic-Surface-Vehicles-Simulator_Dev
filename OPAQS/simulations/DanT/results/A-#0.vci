@@ -1,15 +1,15 @@
-file 19438 1615087046                                           
+file 15362 1615094051                                           
 version 2
-run A-0-20210307-03:17:16-11120
+run A-0-20210307-05:13:57-15552
 attr configname A
-attr datetime 20210307-03:17:16
+attr datetime 20210307-05:13:57
 attr experiment A
 attr inifile GwSimV3_2021.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network NetworkTormV2
-attr processid 11120
+attr processid 15552
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -89,12 +89,14 @@ vector 0 NetworkTormV2 neighbourhoodSize:vector ETV
 attr source neighbourhoodSize
 vector 1 NetworkTormV2 deliveryRatio:vector ETV
 attr source sum(totalDataBytesReceived)/sum(totalDataBytesReceivableByAllNodes)
+0	3414 6876 7 4176 0.05 8.25 494 1 1 494 494
+1	10290 280 25 4104 0.1 8.1 18 nan nan nan nan
 vector 2 NetworkTormV2 dataBytesReceivedSum:vector ETV
 attr source sum(dataBytesReceived)
 vector 3 NetworkTormV2 totalBytesReceivedSum:vector ETV
 attr source sum(totalBytesReceived)
-0	3600 14314 7 8784 0.05 16.5 990 1 1 990 990
-1	17914 550 25 8604 0.1 16.1 34 nan nan nan nan
-2	18464 486 5409 8859 10.483429964638 16.533444131004 17 141 2397 21573 35487585
-3	18950 486 5409 8859 10.483429964638 16.533444131004 17 141 2397 21573 35487585
+0	10756 3730 4239 6649 8.3 12.45 252 1 1 252 252
+1	14486 134 4631 6423 9.1 12.1 8 nan nan nan nan
+2	14620 370 5697 6506 11.033431093679 12.133433443579 13 141 1833 12831 16282539
+3	14990 370 5697 6506 11.033431093679 12.133433443579 13 141 1833 12831 16282539
 

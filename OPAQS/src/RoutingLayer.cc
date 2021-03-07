@@ -1,7 +1,7 @@
 //
 // The model implementation for a Forwarding module (eg. Epidemic, spray, etc) Routing layer
 //
-// @author : João Patrício (castanheirapatricio@ua.pt)
+// @author : JoÃ£o PatrÃ­cio (castanheirapatricio@ua.pt)
 // @date   : 19-march-2019
 //
 
@@ -50,13 +50,15 @@ void RoutingLayer::initialize(int stage)
 
 
         //FILE ResultsGen
-        string nameGen="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsGen";
+        std::string pathH = get_current_dir();
+        std::string nameGen = pathH + "\\DataResults\\ResultsGen";
+//        string nameGen="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsGen";
         string noGen=ownMACAddress.substr(15,17);
         nameGen.append(noGen);
         nameGen.append(".txt");
         //EV<<"nameF: "<<nameF<<"\n";
         ofstream outfileGen(nameGen,ios::out);
-        outfileGen<<"Generated Data \nAuthor: João Patrício (castanheirapatricio@ua.pt)"<<endl;
+        outfileGen<<"Generated Data \nAuthor: JoÃ£o PatrÃ­cio (castanheirapatricio@ua.pt)"<<endl;
         outfileGen.close();
         std::ofstream outGen(nameGen, std::ios_base::app);
         auto startGen = std::chrono::system_clock::now();
@@ -68,13 +70,14 @@ void RoutingLayer::initialize(int stage)
         outGen.close();
 
         //FILE ResultsLQE
-        string nameF="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsLQE";
+        std::string nameF = pathH + "\\DataResults\\ResultsLQE";
+//        string nameF="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsLQE";
         string noS=ownMACAddress.substr(15,17);
         nameF.append(noS);
         nameF.append(".txt");
         //EV<<"nameF: "<<nameF<<"\n";
         ofstream outfile(nameF,ios::out);
-        outfile<<"RESULTS FILE \nAuthor: João Patrício (castanheirapatricio@ua.pt)"<<endl;
+        outfile<<"RESULTS FILE \nAuthor: JoÃ£o PatrÃ­cio (castanheirapatricio@ua.pt)"<<endl;
         outfile.close();
         std::ofstream out(nameF, std::ios_base::app);
         auto start = std::chrono::system_clock::now();
@@ -86,13 +89,14 @@ void RoutingLayer::initialize(int stage)
         out.close();
 
         //File ResultsStor
-        string nameFstor="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsStor";
+        std::string nameFstor = pathH + "\\DataResults\\ResultsStor";
+//        string nameFstor="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsStor";
         string noSstor=ownMACAddress.substr(15,17);
         nameFstor.append(noSstor);
         nameFstor.append(".txt");
         //EV<<"nameF: "<<nameF<<"\n";
         ofstream outfilestor(nameFstor,ios::out);
-        outfilestor<<"RESULTS FILE \nAuthor: João Patrício (castanheirapatricio@ua.pt)"<<endl;
+        outfilestor<<"RESULTS FILE \nAuthor: JoÃ£o PatrÃ­cio (castanheirapatricio@ua.pt)"<<endl;
         outfilestor.close();
         std::ofstream outstor(nameFstor, std::ios_base::app);
         auto startstor = std::chrono::system_clock::now();
@@ -104,13 +108,14 @@ void RoutingLayer::initialize(int stage)
         outstor.close();
 
         //File ResultsGW
-        string nameFgw="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsGW";
+        std::string nameFgw = pathH + "\\DataResults\\ResultsGw";
+//        string nameFgw="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsGW";
         string noSgw=ownMACAddress.substr(15,17);
         nameFgw.append(noSgw);
         nameFgw.append(".txt");
         //EV<<"nameF: "<<nameF<<"\n";
         ofstream outfilegw(nameFgw,ios::out);
-        outfilegw<<"RESULTS FILE \nAuthor: João Patrício (castanheirapatricio@ua.pt)"<<endl;
+        outfilegw<<"RESULTS FILE \nAuthor: JoÃ£o PatrÃ­cio (castanheirapatricio@ua.pt)"<<endl;
         outfilegw.close();
         std::ofstream outgw(nameFgw, std::ios_base::app);
         auto startgw = std::chrono::system_clock::now();
@@ -306,7 +311,9 @@ void RoutingLayer::handleDataReqMsg(cMessage *msg){
                    if(cnt<=1){
                        //EV<<"gwAdd"<<gwAdd<<"\n";
                        //save info into file
-                       string nameF="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsLQE";
+                       std::string pathH = get_current_dir();
+                       std::string nameF = pathH + "\\DataResults\\ResultsLQE";
+//                       string nameF="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsLQE";
                        string nMY=MyAddH.substr(15,17);
                        string nGW=gwAdd.substr(15,17);
                        nameF.append(nMY);
@@ -368,7 +375,7 @@ void RoutingLayer::handleDataReqMsg(cMessage *msg){
                        int dstID=graphR.add_element(destAdd);
                        int weightH=graphR.returnWGrapfT(myID, dstID);
 
-                       //verifica se o vizinho direto está no grafo
+                       //verifica se o vizinho direto estÃ¡ no grafo
                        if((weightH>0)){
 
 
@@ -545,7 +552,7 @@ void RoutingLayer::handleBeaconInfo(cMessage *msg){
     dataRequestMsg->setRealPacketSize(realPacketSize);
     dataRequestMsg->setByteLength(realPacketSize);
     dataRequestMsg->setSSI(beaconMsg->getSSI());
-    dataRequestMsg->setProb(beaconMsg->getMyProb());      //VERIFICAR VALOR DE PROB QUE AQUI METO pk é o meu
+    dataRequestMsg->setProb(beaconMsg->getMyProb());      //VERIFICAR VALOR DE PROB QUE AQUI METO pk Ã© o meu
     dataRequestMsg->setInjectedTime(simTime().dbl());
 
     //Para retirar futuramente
@@ -570,7 +577,7 @@ void RoutingLayer::handleAckFromLowerLayer(cMessage *msg){
     bool isFinalDest=ackMsg->getIsFinalDest();
 
     if(isFinalDest){
-        //Stor.deleteMsg(messageID); //PARA JÁ NAO QUERO QUE APAGUE PARA TESTAR SITUAÇÃO ATUAL DE SPREAD
+        //Stor.deleteMsg(messageID); //PARA JÃ� NAO QUERO QUE APAGUE PARA TESTAR SITUAÃ‡ÃƒO ATUAL DE SPREAD
         EV<<"It reached the GW! \n";
     }
 
@@ -606,24 +613,26 @@ void RoutingLayer::handleDataMsgFromUpperLayer(cMessage *msg) //Store in cache
 
         //Save Data
         //save info into file
-        string nameF="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsGen";
-        string noS=ownMACAddress.substr(15,17);
-        nameF.append(noS);
-        nameF.append(".txt");
-        std::ofstream out(nameF, std::ios_base::app);
+    std::string pathH = get_current_dir();
+    std::string nameF = pathH + "\\DataResults\\ResultsGen";
+    //        string nameF="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsGen";
+    string noS=ownMACAddress.substr(15,17);
+    nameF.append(noS);
+    nameF.append(".txt");
+    std::ofstream out(nameF, std::ios_base::app);
 
-        //Graph
-        string dataN=upperDataMsg->getDataName();
-        string msIDis="Data Name: ";
-        msIDis.append(dataN);
-        out<<msIDis;
-        //Time
-        std::string timeMsg = std::to_string(upperDataMsg->getInjectedTime().dbl());//getInjectedTime().dbl());
-        string timeGen=" | Generated Time is : ";
-        timeGen.append(timeMsg);
-        out<<timeGen;
-        out<<" |End \n";
-        out.close();
+    //Graph
+    string dataN=upperDataMsg->getDataName();
+    string msIDis="Data Name: ";
+    msIDis.append(dataN);
+    out<<msIDis;
+    //Time
+    std::string timeMsg = std::to_string(upperDataMsg->getInjectedTime().dbl());//getInjectedTime().dbl());
+    string timeGen=" | Generated Time is : ";
+    timeGen.append(timeMsg);
+    out<<timeGen;
+    out<<" |End \n";
+    out.close();
 
 
 
@@ -675,43 +684,45 @@ void RoutingLayer::handleDataMsgFromLowerLayer(cMessage *msg)//cache
             EV<<"Sou a final destination \n";
 
             //save info into file
-            string nameF="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsGW";
+            std::string pathH = get_current_dir();
+            std::string nameF = pathH + "\\DataResults\\ResultsGW";
+//            string nameF="/home/mob/Documents/workspaceO/Tese/OpNetas/OPAQS/simulations/DanT/DataResults/ResultsGW";
             string noS=ownMACAddress.substr(15,17);
-                              nameF.append(noS);
-                              nameF.append(".txt");
-                              std::ofstream out(nameF, std::ios_base::app);
-                              //Data Name
-                              string srcMAC=omnetDataMsg->getDataName();
-                              string srcer="Source: ";
-                              srcer.append(srcMAC);
-                              out<<srcer;
-                              //MessageID
-                              std::string msID=std::to_string(omnetDataMsg->getNMsgOrder());//getMsgUniqueID();
-                              string msIDis=" | Message ID: ";
-                              msIDis.append(msID);
-                              out<<msIDis;
-                              /*//Time generated
+            nameF.append(noS);
+            nameF.append(".txt");
+            std::ofstream out(nameF, std::ios_base::app);
+            //Data Name
+            string srcMAC=omnetDataMsg->getDataName();
+            string srcer="Source: ";
+            srcer.append(srcMAC);
+            out<<srcer;
+            //MessageID
+            std::string msID=std::to_string(omnetDataMsg->getNMsgOrder());//getMsgUniqueID();
+            string msIDis=" | Message ID: ";
+            msIDis.append(msID);
+            out<<msIDis;
+            /*//Time generated
                               std::string timeMsg = std::to_string(omnetDataMsg->getInjectedTime().dbl());//getInjectedTime().dbl());
                               string timeGen=" | Time generated: ";
                               timeGen.append(timeMsg);
                               out<<timeGen;*/
-                              //Time sent from src
-                              std::string timeSMsg = std::to_string(omnetDataMsg->getSentTimeRout().dbl());//getInjectedTime().dbl());
-                              string timeSSrc=" | Time sentFromSrcR: ";
-                              timeSSrc.append(timeSMsg);
-                              out<<timeSSrc;
-                              /*//Time sent from neigh
+            //Time sent from src
+            std::string timeSMsg = std::to_string(omnetDataMsg->getSentTimeRout().dbl());//getInjectedTime().dbl());
+            string timeSSrc=" | Time sentFromSrcR: ";
+            timeSSrc.append(timeSMsg);
+            out<<timeSSrc;
+            /*//Time sent from neigh
                               std::string timeSMsgN = std::to_string(omnetDataMsg->getSentTime().dbl());//getInjectedTime().dbl());
                               string timeSN=" | Time sentFromNeigh: ";
                               timeSN.append(timeSMsgN);
                                out<<timeSN;*/
-                              //time received here
-                              std::string timeRMsg = std::to_string(omnetDataMsg->getReceivedTimeRout().dbl());//getReceivedTime().dbl());
-                              string timeRec=" | Time receivedFromSrcR: ";
-                              timeRec.append(timeRMsg);
-                              out<<timeRec;
-                              out<<" |End \n";
-                              out.close();
+            //time received here
+            std::string timeRMsg = std::to_string(omnetDataMsg->getReceivedTimeRout().dbl());//getReceivedTime().dbl());
+            string timeRec=" | Time receivedFromSrcR: ";
+            timeRec.append(timeRMsg);
+            out<<timeRec;
+            out<<" |End \n";
+            out.close();
 
 
             //cacheData=FALSE;
@@ -735,7 +746,7 @@ void RoutingLayer::handleDataMsgFromLowerLayer(cMessage *msg)//cache
     //Data Treatment if I'm gateway:
     if(imDestiny){ //GwResults
         if(Stor.msgExistsInC(msg)){
-            //guarda aqui nº pacotes recebidos que ja tinha recebido antes e guardado.
+            //guarda aqui nÂº pacotes recebidos que ja tinha recebido antes e guardado.
             //EV<<"Sava \n";
         }
     }
@@ -833,7 +844,7 @@ void RoutingLayer::returnSelectMsgIDList(vector<string> & selectedMessageIDList)
 
 
 /***********************************************************************************************
- * Gets the size of the list oh cache Msgs (nº of Msgs in cache)
+ * Gets the size of the list oh cache Msgs (nÂº of Msgs in cache)
  */
 int RoutingLayer::cacheListSize(){
     return Stor.cacheListSize();
@@ -912,6 +923,13 @@ void RoutingLayer::updateGateway(){
     }
     actual_gateway=currentGW;
     //EV<<"Current Gateway is "<<actual_gateway<<" until "<<deadT<<" s \n";
+}
+
+std::string RoutingLayer::get_current_dir() {
+   char buff[FILENAME_MAX]; //create string buffer to hold path
+   GetCurrentDir( buff, FILENAME_MAX );
+   string current_working_dir(buff);
+   return current_working_dir;
 }
 
 /***************************************************************************************
