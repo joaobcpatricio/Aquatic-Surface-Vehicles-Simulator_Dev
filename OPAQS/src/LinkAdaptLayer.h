@@ -20,7 +20,6 @@
 
 using namespace omnetpp;
 
-using namespace std;
 
 class LinkAdaptLayer: public cSimpleModule
 {
@@ -30,9 +29,9 @@ class LinkAdaptLayer: public cSimpleModule
         virtual int numInitStages() const;
 
     private:
-        string ownMACAddress;
-        string ownBTMACAddress;
-        string broadcastMACAddress;
+        std::string ownMACAddress;
+        std::string ownBTMACAddress;
+        std::string broadcastMACAddress;
 
 };
 

@@ -15,21 +15,16 @@
 #include <cstdlib>
 #include <sstream>
 #include <string>
+#include <queue>
 
 #include "OutsMsg_m.h"
 #include "InternalMsg_m.h"
-
 #include "StorageM.h"
 #include "inet/mobility/contract/IMobility.h"
-#include <queue>
-
 #include "GraphT.h"
 #include "Logger.h"
 
-
-
 using namespace omnetpp;
-
 using namespace std;
 
 class BaseNodeInfo;
@@ -96,9 +91,6 @@ private:
         simtime_t lastBrecT=0;
     };
 
-
-
-
     list<SyncedNeighbour*> syncedNeighbourList;
     bool syncedNeighbourListIHasChanged;
 
@@ -128,10 +120,8 @@ private:
 
     Logger log;
 
-    //29/08
      GraphT graphe;
      int maximumNoVert;
-
 
      bool updateGraph(cMessage *msg);
      bool updateMyNGraph(cMessage *msg);
@@ -162,8 +152,6 @@ private:
 
      double resetGPeriod;
 
-
-
      //double calcAgeFact(cMessage *msg);
      //double calcFactorB(cMessage *msg);
      //double calcBitRate(cMessage *msg);
@@ -171,9 +159,6 @@ private:
      //double calcWeight(cMessage *msg);
      //double calcNeighWeight(cMessage *msg);
      //double findInNeigLayerList(string addrN);  //returns the time of the last contact on the previous saved list of neighbors
-
-
-
 };
 
 #define NEIGHBORINGLAYER_SIMMODULEINFO         " NeighboringLayer>!<" << simTime() << ">!<" << getParentModule()->getFullName()

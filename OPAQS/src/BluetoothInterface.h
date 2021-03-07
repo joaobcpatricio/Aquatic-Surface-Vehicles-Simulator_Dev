@@ -26,15 +26,12 @@
 #include <cstdlib>
 #include <string>
 #include <queue>
+#include <sstream>
 
 #include "OutsMsg_m.h"
 #include "InternalMsg_m.h"
 
-#include <sstream>
-
 using namespace omnetpp;
-
-using namespace std;
 
 class BaseNodeInfo;
 
@@ -47,30 +44,29 @@ protected:
     virtual void finish();
 
 private:
-    string ownBTMACAddress;
+    std::string ownBTMACAddress;
     double wirelessRange;
-    string expectedNodeTypes;
+    std::string expectedNodeTypes;
     double neighbourScanInterval;
     double bandwidthBitRate;
     int wirelessHeaderSize;
-//ADDED 7/07/19 18h49
     int minSSI;
     int valSSI;
     double calculateSSI(double x);
 
-    string broadcastMACAddress;
+    std::string broadcastMACAddress;
     BaseNodeInfo *ownNodeInfo;
-    list<BaseNodeInfo*> allNodeInfoList;
-    queue<cMessage*> packetQueue;
+    std::list<BaseNodeInfo*> allNodeInfoList;
+    std::queue<cMessage*> packetQueue;
     cMessage *sendPacketTimeoutEvent = NULL;
 
-    list<BaseNodeInfo*> currentNeighbourNodeInfoList;
-    list<BaseNodeInfo*> atTxNeighbourNodeInfoList;
+    std::list<BaseNodeInfo*> currentNeighbourNodeInfoList;
+    std::list<BaseNodeInfo*> atTxNeighbourNodeInfoList;
     cMessage *currentPendingMsg = NULL;
 
     void setupSendingMsg(cMessage *msg);
     void sendPendingMsg();
-    string getDestinationAddress(cMessage *msg);
+    std::string getDestinationAddress(cMessage *msg);
 
     // statistics related variable
     simsignal_t neighbourhoodSizeSignal;

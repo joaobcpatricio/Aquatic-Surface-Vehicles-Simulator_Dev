@@ -14,11 +14,8 @@ Define_Module(NeighboringLayer);
 void NeighboringLayer::initialize(int stage)
 {
     if (stage == 0) {
-
-
         graphe=GraphT();
         log=Logger();
-
         // get parameters
         ownMACAddress = par("ownMACAddress").stringValue();
         ownBTMACAddress = par("ownBTMACAddress").stringValue();
@@ -28,27 +25,18 @@ void NeighboringLayer::initialize(int stage)
         numEventsHandled = 0;
         syncedNeighbourListIHasChanged = TRUE;
         myProb=par("ProbInit");
-
         GWAddr=par("GWAddr").stringValue();
         distProb=0.1;
         isNeighNeigh=0;
-
-        //Added 23/07/19
         sendWifiFirst = par("sendWifiFirst");
         msgIsBT=false;
-
         delayPerDataMsg = par("delayPerDataMsg");
-
         maximumNoVert = par("maximumNoVert");
         //graphe.maximumNoVert(maximumNoVert);
         maxLengthGraph=par("maxLengthGraph");
-
         max_age = par("max_age");
         max_absent_time = par("max_absent_time");
-
         resetGPeriod = par("resetGPeriod");
-
-
     } else if (stage == 1) {
         // get own module info
         ownNodeInfo = new BaseNodeInfo();
@@ -59,24 +47,19 @@ void NeighboringLayer::initialize(int stage)
                 break;
             }
         }
-
         for (int i = 0; i <N_nodes ; ++i) {
             Ener[i]=0;
         }
-
-
     } else if (stage == 2) {
         //calcEnerg(0,false);
         myEner=EnergyStart;
         ener_spent=0;
         MyBat=9999;
-
         //set period to clean graph and ener table
         cMessage *resetG = new cMessage("Reset Graph Event");
         //EV<<"Checking GW status \n";
         resetG->setKind(RESETGRAPH_EVENT_CODE);
         scheduleAt(simTime() + resetGPeriod, resetG);
-
     } else {
         EV_FATAL << NEIGHBORINGLAYER_SIMMODULEINFO << "Something is radically wrong in initialisation \n";
     }
@@ -90,31 +73,28 @@ int NeighboringLayer::numInitStages() const
 
 void NeighboringLayer::handleMessage(cMessage *msg)
 {
-
     cGate *gate;
     char gateName[64];
-
     numEventsHandled++;
-
     // self messages
     if (msg->isSelfMessage() && msg->getKind() == RESETGRAPH_EVENT_CODE){
         graphe.cleanGraph();
         cleanEnerTable();
         EV<<"Af clen:"<<graphe.returnGraphT()<<"\n";
         //set period to clean graph and ener table
-                cMessage *resetG = new cMessage("Reset Graph Event");
-                //EV<<"Checking GW status \n";
-                resetG->setKind(RESETGRAPH_EVENT_CODE);
-                scheduleAt(simTime() + resetGPeriod, resetG);
+        cMessage *resetG = new cMessage("Reset Graph Event");
+        //EV<<"Checking GW status \n";
+        resetG->setKind(RESETGRAPH_EVENT_CODE);
+        scheduleAt(simTime() + resetGPeriod, resetG);
 
     }else if (msg->isSelfMessage()) {
         EV_INFO << NEIGHBORINGLAYER_SIMMODULEINFO << "Received unexpected self message" << "\n";
         delete msg;
 
-    // messages from other layers
+        // messages from other layers
     } else {
 
-       // get message arrival gate name
+        // get message arrival gate name
         gate = msg->getArrivalGate();
         strcpy(gateName, gate->getName());
 
@@ -123,29 +103,29 @@ void NeighboringLayer::handleMessage(cMessage *msg)
             EV<<"Neighboring: handleNeighBourListMsg vizinhos\n";
             handleNeighbourListMsgFromLowerLayer(msg);
 
-        // Beacon message arrived from the lower layer (link layer)
+            // Beacon message arrived from the lower layer (link layer)
         } else if (strstr(gateName, "lowerLayerIn") != NULL && dynamic_cast<BeaconMsg*>(msg) != NULL) {
             EV<<"Neighboring: handling Beacon\n";
             handleBeaconMsgFromLowerLayer(msg);
 
-//ADDED 23/07/19 16h15
+            //ADDED 23/07/19 16h15
             //BT Neighbour list -> DIRECT NEIGHBOURS
 
         }else if (strstr(gateName, "lowerLayerIn") != NULL && dynamic_cast<NeighbourListMsgBT*>(msg) != NULL) {
-                EV<<"Neighboring: handleNeighBourListMsgBT vizinhos\n";
-                updateNeighbourListBT(msg);
+            EV<<"Neighboring: handleNeighBourListMsgBT vizinhos\n";
+            updateNeighbourListBT(msg);
 
-        // DataReq message arrived from the lower layer (link layer)
+            // DataReq message arrived from the lower layer (link layer)
         } else if (strstr(gateName, "lowerLayerIn") != NULL && dynamic_cast<DataReqMsg*>(msg) != NULL) {
             EV<<"Neighboring: handling DataReq\n";
             handleDataReqMsgFromLowerLayer(msg);
 
 
-        //Wifi GraphUpdtMsg -> DIRECT NEIGHBOURS
+            //Wifi GraphUpdtMsg -> DIRECT NEIGHBOURS
         }else if (strstr(gateName, "lowerLayerIn") != NULL && dynamic_cast<GraphUpdtMsg*>(msg) != NULL) {
-                EV<<"Neighboring: handleGraphUpdtMsg\n";
-                handleGraphUpdtMsgFromLowerLayer(msg);
-        //BT GraphUpdtMsg -> DIRECT NEIGHBOURS
+            EV<<"Neighboring: handleGraphUpdtMsg\n";
+            handleGraphUpdtMsgFromLowerLayer(msg);
+            //BT GraphUpdtMsg -> DIRECT NEIGHBOURS
         }else if (strstr(gateName, "lowerLayerIn") != NULL && dynamic_cast<GraphUpdtMsgBT*>(msg) != NULL) {
             EV<<"Neighboring: handleGraphUpdtMsg\n";
             handleGraphUpdtMsgFromLowerLayer(msg);
@@ -158,7 +138,7 @@ void NeighboringLayer::handleMessage(cMessage *msg)
             EV<<"Neighboring low: handlepcktSentMsg\n";
             handlePcktSentMsg(msg);
 
-        // received some unexpected packet
+            // received some unexpected packet
         } else {
 
             EV_INFO << NEIGHBORINGLAYER_SIMMODULEINFO << "Received unexpected packet" << "\n";
@@ -184,20 +164,20 @@ void NeighboringLayer::handleBeaconMsgFromLowerLayer(cMessage *msg)//neigh
 
     string myAdd;
     if((sourAdd.substr(0,2))=="BT"){
-            myAdd = ownBTMACAddress;
-        }else{
-            myAdd=ownMACAddress;
-        }
+        myAdd = ownBTMACAddress;
+    }else{
+        myAdd=ownMACAddress;
+    }
     int srcID=graphe.add_element(sourAdd);
     int myID=graphe.add_element(myAdd);
 
     //EV<<"Graph Before Update: \n";
     //graphe.displayMatrix(v);
-   // string answb=graphe.returnGraphT();
+    // string answb=graphe.returnGraphT();
     //EV<< "O meu v de display é:"<<v<<"\n";
 
 
-//UPdate of graph
+    //UPdate of graph
     bool updG =updateGraph(msg);
     //bool updMyG=updateMyNGraph();
     //EV<<"RSSI:"<<calculateSSI(msg)<<"\n";
@@ -223,7 +203,7 @@ void NeighboringLayer::handleBeaconMsgFromLowerLayer(cMessage *msg)//neigh
     log.saveMyEner(ownMACAddress, myEner);
 
 
-//-------------------
+    //-------------------
 
     double ssi_ext=calculateSSI(msg);
 
@@ -256,7 +236,7 @@ void NeighboringLayer::handleBeaconMsgFromLowerLayer(cMessage *msg)//neigh
     send(infoMsg, "upperLayerOut");
     sendEnerTable();
 
-//Added 26/07/2019
+    //Added 26/07/2019
     string SouceBAdd = BeaconReceived->getSourceAddress();
     if((SouceBAdd.substr(0,2))=="BT"){
         cancelBackOffTBT(msg);
@@ -300,214 +280,214 @@ void NeighboringLayer::updateNeighbourList(cMessage *msg){ //por fazer
     string graf=graphe.returnGraphT();
     //EV<<"Graph by each neigh is:"<<graf<<"\n";
     NeighbourListMsg *neighListMsg = dynamic_cast<NeighbourListMsg*>(msg);
-     // if no neighbours or cache is empty, just return
-     if (neighListMsg->getNeighbourNameListArraySize() == 0){       //AQUI VIA SE A CACHE ESTAVA VAZIA
-         // setup sync neighbour list for the next time - only if there were some changes
-         if (syncedNeighbourListIHasChanged) {
-             setSyncingNeighbourInfoForNoNeighbours();
-             syncedNeighbourListIHasChanged = FALSE;
-         }
-         delete msg;
-         return;
-     }
-     // send summary vector messages (if appropriate) to all nodes to sync in a loop
-     int i = 0;
-     while (i < neighListMsg->getNeighbourNameListArraySize()) {
-         string nodeMACAddress = neighListMsg->getNeighbourNameList(i);
-         EV<<"The neigh is:"<<nodeMACAddress<<"\n";
-         // get syncing info of neighbor
-         SyncedNeighbour *syncedNeighbour = getSyncingNeighbourInfo(nodeMACAddress);
+    // if no neighbours or cache is empty, just return
+    if (neighListMsg->getNeighbourNameListArraySize() == 0){       //AQUI VIA SE A CACHE ESTAVA VAZIA
+        // setup sync neighbour list for the next time - only if there were some changes
+        if (syncedNeighbourListIHasChanged) {
+            setSyncingNeighbourInfoForNoNeighbours();
+            syncedNeighbourListIHasChanged = FALSE;
+        }
+        delete msg;
+        return;
+    }
+    // send summary vector messages (if appropriate) to all nodes to sync in a loop
+    int i = 0;
+    while (i < neighListMsg->getNeighbourNameListArraySize()) {
+        string nodeMACAddress = neighListMsg->getNeighbourNameList(i);
+        EV<<"The neigh is:"<<nodeMACAddress<<"\n";
+        // get syncing info of neighbor
+        SyncedNeighbour *syncedNeighbour = getSyncingNeighbourInfo(nodeMACAddress);
 
-         // indicate that this node was considered this time
-         syncedNeighbour->nodeConsidered = TRUE;
+        // indicate that this node was considered this time
+        syncedNeighbour->nodeConsidered = TRUE;
 
-         bool syncWithNeighbour = FALSE;
+        bool syncWithNeighbour = FALSE;
 
-         if (syncedNeighbour->syncCoolOffEndTime >= simTime().dbl()) {
-              EV<<"if the sync was done recently, don't sync again until the anti-entropy interval has elapsed \n";
-             syncWithNeighbour = FALSE;
+        if (syncedNeighbour->syncCoolOffEndTime >= simTime().dbl()) {
+            EV<<"if the sync was done recently, don't sync again until the anti-entropy interval has elapsed \n";
+            syncWithNeighbour = FALSE;
 
-         } else if (syncedNeighbour->randomBackoffStarted && syncedNeighbour->randomBackoffEndTime >= simTime().dbl()) {
-              EV<<"if random backoff to sync is still active, then wait until time expires \n";
-             syncWithNeighbour = FALSE;
+        } else if (syncedNeighbour->randomBackoffStarted && syncedNeighbour->randomBackoffEndTime >= simTime().dbl()) {
+            EV<<"if random backoff to sync is still active, then wait until time expires \n";
+            syncWithNeighbour = FALSE;
 
-         } else if (syncedNeighbour->neighbourSyncing && syncedNeighbour->neighbourSyncEndTime >= simTime().dbl()) {
-              EV<<"if this neighbour has started syncing with me, then wait until this neighbour finishes \n";
-             syncWithNeighbour = FALSE;
-
-
-         } else if (syncedNeighbour->randomBackoffStarted && syncedNeighbour->randomBackoffEndTime < simTime().dbl()) {
-              EV<<"has the random backoff just finished - if so, then my turn to start the syncing process \n";
-             syncWithNeighbour = TRUE;
+        } else if (syncedNeighbour->neighbourSyncing && syncedNeighbour->neighbourSyncEndTime >= simTime().dbl()) {
+            EV<<"if this neighbour has started syncing with me, then wait until this neighbour finishes \n";
+            syncWithNeighbour = FALSE;
 
 
-         } else if (syncedNeighbour->neighbourSyncing && syncedNeighbour->neighbourSyncEndTime < simTime().dbl()) {
-              EV<<"has the neighbours syncing period elapsed - if so, my turn to sync \n";
-             syncWithNeighbour = TRUE;
+        } else if (syncedNeighbour->randomBackoffStarted && syncedNeighbour->randomBackoffEndTime < simTime().dbl()) {
+            EV<<"has the random backoff just finished - if so, then my turn to start the syncing process \n";
+            syncWithNeighbour = TRUE;
 
-         } else {
-              EV<<"neighbour seen for the first time (could also be after the cool off period) then start the random backoff \n";
-             syncedNeighbour->randomBackoffStarted = TRUE;
-             double randomBackoffDuration = uniform(1.0, maximumRandomBackoffDuration, usedRNG);
-             syncedNeighbour->randomBackoffEndTime = simTime().dbl() + randomBackoffDuration;
-             syncWithNeighbour = FALSE;
-         }
-         // from previous questions - if syncing required
-         if (syncWithNeighbour) {
-             // set the cooloff period
-             syncedNeighbour->syncCoolOffEndTime = simTime().dbl() + antiEntropyInterval;
-             // initialize all other checks
-             syncedNeighbour->randomBackoffStarted = FALSE;
-             syncedNeighbour->randomBackoffEndTime = 0.0;
-             syncedNeighbour->neighbourSyncing = FALSE;
-             syncedNeighbour->neighbourSyncEndTime = 0.0;
 
-             //Added 23/07/19 15h25
-             if(sendWifiFirst){
-                 //bool updtMyNeig=updateMyNGraph(msg);
+        } else if (syncedNeighbour->neighbourSyncing && syncedNeighbour->neighbourSyncEndTime < simTime().dbl()) {
+            EV<<"has the neighbours syncing period elapsed - if so, my turn to sync \n";
+            syncWithNeighbour = TRUE;
 
-                 EV<<"Send Beacon through Wifi\n";
-                 msgIsBT=false;
-                 // send beacon (to start syncing)
-                 BeaconMsg *beaconMsg = makeBeaconVectorMessage(msg);
-                 beaconMsg->setDestinationAddress(nodeMACAddress.c_str());
-                 //Added 27/06 1h26
-                 //get my prob based on distance
-                 distProb=GWisMyNeigh(msg);
-                 //EV<<"Set on beacon g: "<<beaconMsg->getNeighGraph()<<"\n";
-                 //EV<<"Destin: "<<beaconMsg->getDestinationAddress()<<"\n";
-                 send(beaconMsg, "lowerLayerOut");
-             }
-         }
-         i++;
-     }
-     // setup sync neighbour list for the next time
-     setSyncingNeighbourInfoForNextRound();
-     // synched neighbour list must be updated in next round
-     // as there were changes
-     syncedNeighbourListIHasChanged = TRUE;
+        } else {
+            EV<<"neighbour seen for the first time (could also be after the cool off period) then start the random backoff \n";
+            syncedNeighbour->randomBackoffStarted = TRUE;
+            double randomBackoffDuration = uniform(1.0, maximumRandomBackoffDuration, usedRNG);
+            syncedNeighbour->randomBackoffEndTime = simTime().dbl() + randomBackoffDuration;
+            syncWithNeighbour = FALSE;
+        }
+        // from previous questions - if syncing required
+        if (syncWithNeighbour) {
+            // set the cooloff period
+            syncedNeighbour->syncCoolOffEndTime = simTime().dbl() + antiEntropyInterval;
+            // initialize all other checks
+            syncedNeighbour->randomBackoffStarted = FALSE;
+            syncedNeighbour->randomBackoffEndTime = 0.0;
+            syncedNeighbour->neighbourSyncing = FALSE;
+            syncedNeighbour->neighbourSyncEndTime = 0.0;
+
+            //Added 23/07/19 15h25
+            if(sendWifiFirst){
+                //bool updtMyNeig=updateMyNGraph(msg);
+
+                EV<<"Send Beacon through Wifi\n";
+                msgIsBT=false;
+                // send beacon (to start syncing)
+                BeaconMsg *beaconMsg = makeBeaconVectorMessage(msg);
+                beaconMsg->setDestinationAddress(nodeMACAddress.c_str());
+                //Added 27/06 1h26
+                //get my prob based on distance
+                distProb=GWisMyNeigh(msg);
+                //EV<<"Set on beacon g: "<<beaconMsg->getNeighGraph()<<"\n";
+                //EV<<"Destin: "<<beaconMsg->getDestinationAddress()<<"\n";
+                send(beaconMsg, "lowerLayerOut");
+            }
+        }
+        i++;
+    }
+    // setup sync neighbour list for the next time
+    setSyncingNeighbourInfoForNextRound();
+    // synched neighbour list must be updated in next round
+    // as there were changes
+    syncedNeighbourListIHasChanged = TRUE;
 
 
     // EV<<"Updated remove from graph\n";
-     //string answ=graphe.returnGraphT();
+    //string answ=graphe.returnGraphT();
 
-     GraphUpdtMsg *graphUpdt = makeGraphUpdtMessage();
-     graphUpdt->setNoNeighs(false);
-     //EV<<"Neighboring: Sending GraphUpdtmsg to RoutingLayer\n";
-     send(graphUpdt,"upperLayerOut");
-     sendEnerTable();
+    GraphUpdtMsg *graphUpdt = makeGraphUpdtMessage();
+    graphUpdt->setNoNeighs(false);
+    //EV<<"Neighboring: Sending GraphUpdtmsg to RoutingLayer\n";
+    send(graphUpdt,"upperLayerOut");
+    sendEnerTable();
 
 
-     // delete the received neighbor list msg
-     delete msg;
+    // delete the received neighbor list msg
+    delete msg;
 }
 /********************************************************************************************************
  *BLUETOOTH Verifies neighborhood and updates the neighbors list and checks if GW is my neighbor
  */
 void NeighboringLayer::updateNeighbourListBT(cMessage *msg){ //por fazer
     EV<<"N: updateNeighbourListBT \n";
-     NeighbourListMsgBT *neighListMsg = dynamic_cast<NeighbourListMsgBT*>(msg);
-     // if no neighbours or cache is empty, just return
-     if (neighListMsg->getNeighbourNameListArraySize() == 0){       //AQUI VIA SE A CACHE ESTAVA VAZIA
-         // setup sync neighbour list for the next time - only if there were some changes
-         if (syncedNeighbourListBTHasChanged) {
-             setSyncingNeighbourInfoForNoNeighboursBT();
-             syncedNeighbourListBTHasChanged = FALSE;
-         }
-         delete msg;
-         return;
-     }
-     // send Beacon messages (if appropriate) to all nodes to sync in a loop
-     int i = 0;
-     while (i < neighListMsg->getNeighbourNameListArraySize()) {
-         string nodeMACAddress = neighListMsg->getNeighbourNameList(i);
+    NeighbourListMsgBT *neighListMsg = dynamic_cast<NeighbourListMsgBT*>(msg);
+    // if no neighbours or cache is empty, just return
+    if (neighListMsg->getNeighbourNameListArraySize() == 0){       //AQUI VIA SE A CACHE ESTAVA VAZIA
+        // setup sync neighbour list for the next time - only if there were some changes
+        if (syncedNeighbourListBTHasChanged) {
+            setSyncingNeighbourInfoForNoNeighboursBT();
+            syncedNeighbourListBTHasChanged = FALSE;
+        }
+        delete msg;
+        return;
+    }
+    // send Beacon messages (if appropriate) to all nodes to sync in a loop
+    int i = 0;
+    while (i < neighListMsg->getNeighbourNameListArraySize()) {
+        string nodeMACAddress = neighListMsg->getNeighbourNameList(i);
 
-         // get syncing info of neighbor
-         SyncedNeighbour *syncedNeighbour = getSyncingNeighbourInfoBT(nodeMACAddress);
+        // get syncing info of neighbor
+        SyncedNeighbour *syncedNeighbour = getSyncingNeighbourInfoBT(nodeMACAddress);
 
-         // indicate that this node was considered this time
-         syncedNeighbour->nodeConsidered = TRUE;
+        // indicate that this node was considered this time
+        syncedNeighbour->nodeConsidered = TRUE;
 
-         bool syncWithNeighbour = FALSE;
+        bool syncWithNeighbour = FALSE;
 
-         if (syncedNeighbour->syncCoolOffEndTime >= simTime().dbl()) {
-              EV<<"if the sync was done recently, don't sync again until the anti-entropy interval has elapsed \n";
-              //EV<<"timee: "<<simTime().dbl()<<"time Neigh: "<<syncedNeighbour->syncCoolOffEndTime<<" \n";
-             syncWithNeighbour = FALSE;
+        if (syncedNeighbour->syncCoolOffEndTime >= simTime().dbl()) {
+            EV<<"if the sync was done recently, don't sync again until the anti-entropy interval has elapsed \n";
+            //EV<<"timee: "<<simTime().dbl()<<"time Neigh: "<<syncedNeighbour->syncCoolOffEndTime<<" \n";
+            syncWithNeighbour = FALSE;
 
-         } else if (syncedNeighbour->randomBackoffStarted && syncedNeighbour->randomBackoffEndTime >= simTime().dbl()) {
-              EV<<"BT: if random backoff to sync is still active, then wait until time expires \n";
-             syncWithNeighbour = FALSE;
+        } else if (syncedNeighbour->randomBackoffStarted && syncedNeighbour->randomBackoffEndTime >= simTime().dbl()) {
+            EV<<"BT: if random backoff to sync is still active, then wait until time expires \n";
+            syncWithNeighbour = FALSE;
 
-         } else if (syncedNeighbour->neighbourSyncing && syncedNeighbour->neighbourSyncEndTime >= simTime().dbl()) {
-              EV<<"if this neighbour has started syncing with me, then wait until this neighbour finishes \n";
-             syncWithNeighbour = FALSE;
-
-
-         } else if (syncedNeighbour->randomBackoffStarted && syncedNeighbour->randomBackoffEndTime < simTime().dbl()) {
-              EV<<"has the random backoff just finished - if so, then my turn to start the syncing process \n";
-             syncWithNeighbour = TRUE;
-
-         } else if (syncedNeighbour->neighbourSyncing && syncedNeighbour->neighbourSyncEndTime < simTime().dbl()) {
-              EV<<"has the neighbours syncing period elapsed - if so, my turn to sync \n";
-             syncWithNeighbour = TRUE;
-
-         } else {
-              EV<<"neighbour seen for the first time (could also be after the cool off period) then start the random backoff \n";
-             syncedNeighbour->randomBackoffStarted = TRUE;
-             double randomBackoffDuration = uniform(1.0, maximumRandomBackoffDuration, usedRNG);
-             syncedNeighbour->randomBackoffEndTime = simTime().dbl() + randomBackoffDuration;
-             syncWithNeighbour = FALSE;
-         }
-         // from previous questions - if syncing required
-         if (syncWithNeighbour) {
-             // set the cooloff period
-             syncedNeighbour->syncCoolOffEndTime = simTime().dbl() + antiEntropyInterval;
-             // initialize all other checks
-             syncedNeighbour->randomBackoffStarted = FALSE;
-             syncedNeighbour->randomBackoffEndTime = 0.0;
-             syncedNeighbour->neighbourSyncing = FALSE;
-             syncedNeighbour->neighbourSyncEndTime = 0.0;
-
-             //Added 23/07/19 15h25
-             if(!sendWifiFirst){
+        } else if (syncedNeighbour->neighbourSyncing && syncedNeighbour->neighbourSyncEndTime >= simTime().dbl()) {
+            EV<<"if this neighbour has started syncing with me, then wait until this neighbour finishes \n";
+            syncWithNeighbour = FALSE;
 
 
-                 //Remove no longer direct-neighbors from me on graph
-                      bool updtMyNeig=updateMyNGraph(msg);
-                      // EV<<"Updated remove from graph\n";
-                      //string answ=graphe.returnGraphT();
+        } else if (syncedNeighbour->randomBackoffStarted && syncedNeighbour->randomBackoffEndTime < simTime().dbl()) {
+            EV<<"has the random backoff just finished - if so, then my turn to start the syncing process \n";
+            syncWithNeighbour = TRUE;
 
-                 EV<<"N: Send Beacon through BT\n";
-                 msgIsBT=true;
-                 // send beacon (to start syncing)
-                 BeaconMsg *beaconMsg = makeBeaconVectorMessage(msg);
-                 beaconMsg->setDestinationAddress(nodeMACAddress.c_str());
-                 //Added 27/06 1h26
-                 //get my prob based on distance
-                 distProb=GWisMyNeighBT(msg);
-                 //EV<<"Sent lowerLayerOutBT";
-                 //calcEnerg(beaconMsg->getRealPacketSize());
-                 send(beaconMsg, "lowerLayerOut");
-             }
-         }
-         i++;
-     }
-     // setup sync neighbour list for the next time
-     setSyncingNeighbourInfoForNextRoundBT();
-     // synched neighbour list must be updated in next round
-     // as there were changes
-     syncedNeighbourListBTHasChanged = TRUE;
+        } else if (syncedNeighbour->neighbourSyncing && syncedNeighbour->neighbourSyncEndTime < simTime().dbl()) {
+            EV<<"has the neighbours syncing period elapsed - if so, my turn to sync \n";
+            syncWithNeighbour = TRUE;
+
+        } else {
+            EV<<"neighbour seen for the first time (could also be after the cool off period) then start the random backoff \n";
+            syncedNeighbour->randomBackoffStarted = TRUE;
+            double randomBackoffDuration = uniform(1.0, maximumRandomBackoffDuration, usedRNG);
+            syncedNeighbour->randomBackoffEndTime = simTime().dbl() + randomBackoffDuration;
+            syncWithNeighbour = FALSE;
+        }
+        // from previous questions - if syncing required
+        if (syncWithNeighbour) {
+            // set the cooloff period
+            syncedNeighbour->syncCoolOffEndTime = simTime().dbl() + antiEntropyInterval;
+            // initialize all other checks
+            syncedNeighbour->randomBackoffStarted = FALSE;
+            syncedNeighbour->randomBackoffEndTime = 0.0;
+            syncedNeighbour->neighbourSyncing = FALSE;
+            syncedNeighbour->neighbourSyncEndTime = 0.0;
+
+            //Added 23/07/19 15h25
+            if(!sendWifiFirst){
 
 
-     //Remove no longer direct-neighbors from me on graph
+                //Remove no longer direct-neighbors from me on graph
+                bool updtMyNeig=updateMyNGraph(msg);
+                // EV<<"Updated remove from graph\n";
+                //string answ=graphe.returnGraphT();
+
+                EV<<"N: Send Beacon through BT\n";
+                msgIsBT=true;
+                // send beacon (to start syncing)
+                BeaconMsg *beaconMsg = makeBeaconVectorMessage(msg);
+                beaconMsg->setDestinationAddress(nodeMACAddress.c_str());
+                //Added 27/06 1h26
+                //get my prob based on distance
+                distProb=GWisMyNeighBT(msg);
+                //EV<<"Sent lowerLayerOutBT";
+                //calcEnerg(beaconMsg->getRealPacketSize());
+                send(beaconMsg, "lowerLayerOut");
+            }
+        }
+        i++;
+    }
+    // setup sync neighbour list for the next time
+    setSyncingNeighbourInfoForNextRoundBT();
+    // synched neighbour list must be updated in next round
+    // as there were changes
+    syncedNeighbourListBTHasChanged = TRUE;
+
+
+    //Remove no longer direct-neighbors from me on graph
     // bool updtMyNeig=updateMyNGraph(msg);
-     // EV<<"Updated remove from graph\n";
-     //string answ=graphe.returnGraphT();
+    // EV<<"Updated remove from graph\n";
+    //string answ=graphe.returnGraphT();
 
 
-     // delete the received neighbor list msg
-     delete msg;
+    // delete the received neighbor list msg
+    delete msg;
 }
 
 /*************************************************************************************************
@@ -519,7 +499,7 @@ BeaconMsg* NeighboringLayer::makeBeaconVectorMessage(cMessage *msg)//cache
     //myProb=updateProbability(msg,ssi_ext);
 
 
-//My position:
+    //My position:
     inet::Coord ownCoord = ownNodeInfo->nodeMobilityModule->getCurrentPosition();
     //EV<<"My x= "<<ownCoord.x<<" My y= "<<ownCoord.y<<" \n";
 
@@ -648,7 +628,7 @@ void NeighboringLayer::setSyncingNeighbourInfoForNoNeighboursBT()//neigh
 
 /********************************************************************************************************
  * ⇒ Verifies if neighbor node was considered, case not it activates flags as it wasn't in the neighborhood
-*********************************************************************************************************/
+ *********************************************************************************************************/
 void NeighboringLayer::setSyncingNeighbourInfoForNextRound()//neigh
 {
     //⇒ Verifies if neighbor node was considered, case not it activates flags as it wasn't in the neighborhood
@@ -751,8 +731,8 @@ void NeighboringLayer::cancelBackOffTBT(cMessage *msg){ //vector<string> & selec
  * ⇒ Checks my Neighbor list and removes no longer direct-neighbors from Graph.
  */
 bool NeighboringLayer::updateMyNGraph(cMessage *msg){
- NeighbourListMsg *neighListMsg = dynamic_cast<NeighbourListMsg*>(msg);
- EV<<"My g bef updtN"<<graphe.returnGraphT()<<"\n";
+    NeighbourListMsg *neighListMsg = dynamic_cast<NeighbourListMsg*>(msg);
+    EV<<"My g bef updtN"<<graphe.returnGraphT()<<"\n";
 
     bool found = FALSE;
     string addrN;
@@ -785,8 +765,8 @@ bool NeighboringLayer::updateMyNGraph(cMessage *msg){
                 break;*/
 
 
-               found=TRUE;
-               break;
+                found=TRUE;
+                break;
             }
             o++;
         }
@@ -823,7 +803,7 @@ bool NeighboringLayer::updateMyNGraph(cMessage *msg){
 
     //graphe.rem_dge(10)
     string graf=graphe.returnGraphT();
-        EV<<"Graph by MAA:"<<graf<<"\n";
+    EV<<"Graph by MAA:"<<graf<<"\n";
 
     return true;
 }
@@ -872,7 +852,7 @@ bool NeighboringLayer::updateGraph(cMessage *msg){ //String:" 1->2:4;\n2->1:4;\n
             //EV<<"i="<<i<<"\n";
         }
     }
-   /* EV<<"Array recebido: \n";
+    /* EV<<"Array recebido: \n";
     int f=0, g=0;
     //int count=0;
     for(f = 0; f < 5; f++) {
@@ -905,7 +885,7 @@ bool NeighboringLayer::updateGraph(cMessage *msg){ //String:" 1->2:4;\n2->1:4;\n
                     int vID = std::stoi (spath.substr(st,posi-1-st));
                     //EV<<"Me:"<<myID<<"him"<<vID<<"\n";
                     if(vID==myID){
-                       // EV<<"in path \n";
+                        // EV<<"in path \n";
                         im_in_path=true;
                     }else{im_in_path=false;}
                     //int p2 = graphS.find("-",p1);*/
@@ -918,20 +898,20 @@ bool NeighboringLayer::updateGraph(cMessage *msg){ //String:" 1->2:4;\n2->1:4;\n
             //if it's not my position, if the array has value, if the info is not about a direct neigh  of mine, or it is but also of src
             if((s!=myID && o!=myID)){//}&& array[s][o]>=0){
 
-   // EV<<"ups"<<s<<";"<<o<<"mys"<<array[s][myID]<<"by me"<<graphe.returnWGrapfT(s,myID)<<"myo"<<array[myID][o]<<"by me"<<graphe.returnWGrapfT(o,myID)<< "w:"<<array[s][o]<<"from"<<srcID<<"\n";
+                // EV<<"ups"<<s<<";"<<o<<"mys"<<array[s][myID]<<"by me"<<graphe.returnWGrapfT(s,myID)<<"myo"<<array[myID][o]<<"by me"<<graphe.returnWGrapfT(o,myID)<< "w:"<<array[s][o]<<"from"<<srcID<<"\n";
                 //if((graphe.returnWGrapfT(myID, s)<=0 && o==srcID)||(graphe.returnWGrapfT(myID,o)<=0 && s==srcID)){// && !im_in_path){////||graphe.returnWGrapfT(srcID, s)>0)){
                 if((!im_in_path) && (o==srcID || s==srcID)){ //|| array[s][o]>0
                     //nao estou no shortpth e é sobre alguém vizinho direto do src
                     graphe.add_edge(s,o,array[s][o]);
-                   // EV<<"Added: "<<array[s][o]<<"at"<<s<<o<<" from"<<srcID<<"\n";
-            /*  }else if(graphe.returnWGrapfT(myID, s)<=0 && graphe.returnWGrapfT(myID, o)<=0 && s!=srcID && o!=srcID ){
+                    // EV<<"Added: "<<array[s][o]<<"at"<<s<<o<<" from"<<srcID<<"\n";
+                    /*  }else if(graphe.returnWGrapfT(myID, s)<=0 && graphe.returnWGrapfT(myID, o)<=0 && s!=srcID && o!=srcID ){
                     graphe.add_edge(s,o,array[s][o]);
                     EV<<"Added at hop w info "<<s<<o<<"\n";*/
                 }else if((!im_in_path) && s!=srcID && o!=srcID && array[s][o]>0 && graphe.returnWGrapfT(myID, s)<=0 && graphe.returnWGrapfT(myID, o)<=0){
                     //if im not in shrtpth and they're not src
                     graphe.add_edge(s,o,array[s][o]);
                     //if(s==0 && o==3){
-                   // EV<<"Added at hop w info "<<s<<o<<" w "<<array[s][o]<<"\n";
+                    // EV<<"Added at hop w info "<<s<<o<<" w "<<array[s][o]<<"\n";
                     //}
                 }else if((!im_in_path || array[s][o]>0) && s!=srcID && o!=srcID && graphe.returnWGrapfT(myID, s)<=0 && graphe.returnWGrapfT(myID, o)<=0){//array[myID][o]<=0 && array[myID][s]<=0){
                     //if i'm not in path or they're direct neighs, if they're not src or my direct neigh, add any value
@@ -943,16 +923,16 @@ bool NeighboringLayer::updateGraph(cMessage *msg){ //String:" 1->2:4;\n2->1:4;\n
             }
             if(((s==myID && o==srcID)||(s==srcID && o==myID))&& array[s][o]>=0){
                 graphe.add_edge(s,o,array[s][o]);
-               // EV<<"Added2: "<<array[s][o]<<"at"<<s<<o<<" from"<<srcID<<"\n";
+                // EV<<"Added2: "<<array[s][o]<<"at"<<s<<o<<" from"<<srcID<<"\n";
             }
         }
     }
     //UpdateMyGraph (OLD)
-/*    double ssi_ext=fabs(calculateSSI(msg));
+    /*    double ssi_ext=fabs(calculateSSI(msg));
     int ssi_extInt = static_cast<int>(ssi_ext < 0 ? ssi_ext - 0.5 : ssi_ext + 0.5);
     graphe.add_edge(myID, srcID, ssi_extInt);
     //graphe.displayMatrix(maxLengthGraph);
-*/
+     */
 
 
 
@@ -1027,7 +1007,7 @@ double NeighboringLayer::calculateLinkStability(cMessage *msg){
     }else{
         link_stability=-0.002*pow(x,3)+0.0104762*pow(x,2)+0.454762*x+97.2143;
     }
-        return link_stability;
+    return link_stability;
 
 }
 
@@ -1095,13 +1075,13 @@ double NeighboringLayer::GWisMyNeigh(cMessage *msg){
     int i=0;
 
     while (i < neighListMsg->getNeighbourNameListArraySize()){
-             string nodeMACAddress = neighListMsg->getNeighbourNameList(i);
-             if(nodeMACAddress==GWAddr){
-                 EV<<"GW is my neighbor \n";
-                 check=true;
-                 break;
-             }
-             i++;
+        string nodeMACAddress = neighListMsg->getNeighbourNameList(i);
+        if(nodeMACAddress==GWAddr){
+            EV<<"GW is my neighbor \n";
+            check=true;
+            break;
+        }
+        i++;
     }
     if(check){
         isNeigh=1;
@@ -1120,13 +1100,13 @@ double NeighboringLayer::GWisMyNeighBT(cMessage *msg){
     int i=0;
 
     while (i < neighListMsg->getNeighbourNameListArraySize()){
-             string nodeMACAddress = neighListMsg->getNeighbourNameList(i);
-             if(nodeMACAddress==GWAddr){
-                 EV<<"GW is my neighbor \n";
-                 check=true;
-                 break;
-             }
-             i++;
+        string nodeMACAddress = neighListMsg->getNeighbourNameList(i);
+        if(nodeMACAddress==GWAddr){
+            EV<<"GW is my neighbor \n";
+            check=true;
+            break;
+        }
+        i++;
     }
     if(check){
         isNeigh=1;
@@ -1140,22 +1120,22 @@ double NeighboringLayer::GWisMyNeighBT(cMessage *msg){
 
 void NeighboringLayer::cleanOldContacts(){  //I think i can delete this
     list<SyncedNeighbour*>::iterator iteratorSyncedNeighbour;
-        iteratorSyncedNeighbour = syncedNeighbourList.begin();
-        while (iteratorSyncedNeighbour != syncedNeighbourList.end()) {
-            SyncedNeighbour *syncedNeighbour = *iteratorSyncedNeighbour;
-            if ((simTime().dbl()-syncedNeighbour->lastBrecT) >=max_absent_time) {
+    iteratorSyncedNeighbour = syncedNeighbourList.begin();
+    while (iteratorSyncedNeighbour != syncedNeighbourList.end()) {
+        SyncedNeighbour *syncedNeighbour = *iteratorSyncedNeighbour;
+        if ((simTime().dbl()-syncedNeighbour->lastBrecT) >=max_absent_time) {
 
-                //string graf=graphe.returnGraphT();
-                //EV<<"Graph bf old clean:"<<graf<<"\n";
-                //int myID=graphe.add_element(ownMACAddress);
-                //string addrN=syncedNeighbour->nodeMACAddress;
-                //int idN=std::stoi( addrN.substr(15,17));
-                //graphe.rem_edge(myID,idN); Removing here is deleting neighs that finished sync but might be there!
-                //EV<<"Removed absent neigh from graph: "<<idN<<"\n";
-            }
-
-            iteratorSyncedNeighbour++;
+            //string graf=graphe.returnGraphT();
+            //EV<<"Graph bf old clean:"<<graf<<"\n";
+            //int myID=graphe.add_element(ownMACAddress);
+            //string addrN=syncedNeighbour->nodeMACAddress;
+            //int idN=std::stoi( addrN.substr(15,17));
+            //graphe.rem_edge(myID,idN); Removing here is deleting neighs that finished sync but might be there!
+            //EV<<"Removed absent neigh from graph: "<<idN<<"\n";
         }
+
+        iteratorSyncedNeighbour++;
+    }
 
 }
 
@@ -1220,7 +1200,7 @@ void NeighboringLayer::calcEnerg(double size_bits, bool from_gw, double distance
     /*int my_enerS=round(ener_spent+size_bits*Beta);
     ener_spent=my_enerS;//update my value
     Ener[idMy]=my_enerS;//update table my value;
-    */
+     */
 
     int MyBatRound=floor(MyBat);//round(MyBat);
     Ener[idMy]=MyBatRound;//update table my value;
@@ -1261,19 +1241,19 @@ bool NeighboringLayer::updateNeighEner(cMessage *msg){
             //EV<<"WEI: "<<w<<"\n";
             array[vert]=weight;
             i =j+1;
-                //EV<<"i="<<i<<"j="<<j<<"q1:"<<q1<<"q2:"<<q2<<"v:"<<v<<"w:"<<w<<"\n";
+            //EV<<"i="<<i<<"j="<<j<<"q1:"<<q1<<"q2:"<<q2<<"v:"<<v<<"w:"<<w<<"\n";
         }
     }
     EV<<"I'm here lel \n";
-        EV<<"Array recebido: \n";
-        int f=0;
-        //int count=0;
-        for(f = 0; f < N_nodes; f++) {
-                if(array[f]>=0){EV << array[f] << " ";}
-            EV<<"\n";
-        }
-        //Clean direct-link line - I doon't thin kwe need this here
-        /*for(int h=0;h<maxLengthGraph;h++){
+    EV<<"Array recebido: \n";
+    int f=0;
+    //int count=0;
+    for(f = 0; f < N_nodes; f++) {
+        if(array[f]>=0){EV << array[f] << " ";}
+        EV<<"\n";
+    }
+    //Clean direct-link line - I doon't thin kwe need this here
+    /*for(int h=0;h<maxLengthGraph;h++){
             Ener[srcID]=0;
             //graphe.rem_edge(srcID, h);
         }*/
@@ -1290,7 +1270,7 @@ bool NeighboringLayer::updateNeighEner(cMessage *msg){
     }
 
 
-     /*
+    /*
     //Adding the received graph to mine
     for(int s=0;s<maxLengthGraph;s++){//graphe.returnMaxNoVert();s++){
 
@@ -1307,9 +1287,9 @@ bool NeighboringLayer::updateNeighEner(cMessage *msg){
         }
     }*/
 
-        //Update my Weight:
-        Ener[myID]=MyBat;//ener_spent;
-        return true;
+    //Update my Weight:
+    Ener[myID]=MyBat;//ener_spent;
+    return true;
 }
 
 string NeighboringLayer::returnEnerTable(){
@@ -1331,13 +1311,13 @@ void NeighboringLayer::removEdge(int id){
 }
 
 void NeighboringLayer::cleanEnerTable(){    //cleans table exept my value
-      int myID=graphe.add_element(ownMACAddress.c_str());
-      int my_Ener=Ener[myID];
-      //int count=0;
-      for(int i = 0; i < N_nodes; i++) {
-          removEdge(i);
-      }
-      Ener[myID]=my_Ener;
+    int myID=graphe.add_element(ownMACAddress.c_str());
+    int my_Ener=Ener[myID];
+    //int count=0;
+    for(int i = 0; i < N_nodes; i++) {
+        removEdge(i);
+    }
+    Ener[myID]=my_Ener;
 }
 
 void NeighboringLayer::sendEnerTable(){
@@ -1365,13 +1345,13 @@ void NeighboringLayer::finish(){
         delete syncedNeighbour;
     }
     // clear synced neighbour info list BT
-        list<SyncedNeighbour*> syncedNeighbourListBT;
-        while (syncedNeighbourListBT.size() > 0) {
-            list<SyncedNeighbour*>::iterator iteratorSyncedNeighbour = syncedNeighbourListBT.begin();
-            SyncedNeighbour *syncedNeighbour = *iteratorSyncedNeighbour;
-            syncedNeighbourListBT.remove(syncedNeighbour);
-            delete syncedNeighbour;
-        }
+    list<SyncedNeighbour*> syncedNeighbourListBT;
+    while (syncedNeighbourListBT.size() > 0) {
+        list<SyncedNeighbour*>::iterator iteratorSyncedNeighbour = syncedNeighbourListBT.begin();
+        SyncedNeighbour *syncedNeighbour = *iteratorSyncedNeighbour;
+        syncedNeighbourListBT.remove(syncedNeighbour);
+        delete syncedNeighbour;
+    }
 }
 
 
