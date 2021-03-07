@@ -2,6 +2,9 @@
 OPAQS/.metadata/*
 .metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
 .metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
-OPAQS/out/*
+OPAQS/out/gcc-debug*
 OPAQS/simulations/DanT/Logs/*
 OPAQS/simulations/DanT/DataResults/*
+OPAQS/simulations/DanT/results/*
+*.sca
+OPAQS/simulations/DanT/test.txt
