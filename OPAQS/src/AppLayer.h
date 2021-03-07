@@ -25,11 +25,11 @@
 #include <iostream>
 #include "OutsMsg_m.h"
 #include "InternalMsg_m.h"
-
+#include <vector>
 #include <fstream>
 
 using namespace omnetpp;
-using namespace std;
+//using namespace std;
 
 
 #define APPLAYER_SIMMODULEINFO        " AppLayer>!<" << simTime() << ">!<" << getParentModule()->getFullName()
@@ -64,7 +64,7 @@ class AppLayer : public cSimpleModule
         int nextGenerationNotification;
 
         int notificationCount;
-        vector<int> timesMessagesReceived;
+        std::vector<int> timesMessagesReceived;
 
         int usedRNG;
 
@@ -86,21 +86,16 @@ class AppLayer : public cSimpleModule
 
         simsignal_t dataDelaySignal;
 
-        //Adicionei
-        string destinationAddr;
-        string destinationBTAddr;
-        //added 1/07
+        std::string destinationAddr;
+        std::string destinationBTAddr;
         int nMsgOrder;
         bool generateMsg;
-        //int nodeGenMsg;
-        string nodesGenMsg;
+        std::string nodesGenMsg;
 
-        //added 28/07
-        int nodeCh[100];
+        std::vector<int> nodeCh;
         int nAr=0;
         bool nodesThatGen;
 
-        //28/08
         bool startMultipleMsg;
         double numMultipleMsg;
         double countMultipleMsg;
